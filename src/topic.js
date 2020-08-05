@@ -2,6 +2,7 @@ class Topic {
 	constructor(topic, topicAttributes){
 		this.id = topic.id
 		this.name = topicAttributes.name
+
 		Topic.all.push(this)
 	}
 	renderTopicCard() {
