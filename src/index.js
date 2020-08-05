@@ -65,7 +65,8 @@ function fetchSites(id) {
  	 			let newSite = new Site(site)
  	 			// console.log(newSite)
 	 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
-	 			document.querySelector("#topics").innerHTML = " "; 
+	 			document.querySelector("#topics").style.display = "none"; 
+				//find the css that collapses the space, too, display = none, visibility = visible
 				//feature: add "Return to Topics "button that puts the TOPic buttons back 
 				//next: make write button work so note space appears 
  	 	}) 	 // add catch 	
