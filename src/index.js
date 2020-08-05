@@ -59,23 +59,18 @@ function fetchSites(id) {
  
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	console.log("sites data: ", sites)
  	 	let allSites = sites.data.attributes.sites
- 	 	console.log("allSites: ", allSites)
  	 	allSites.forEach(site => {
  	 			// console.log(site.name, site.id)
  	 			let newSite = new Site(site)
  	 			// console.log(newSite)
 	 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
-
- 	 			// renderSiteCard()
- 	 	})
- 	 	//site.topic_id = id or site.data.topic_id
- 	 	
+	 			document.querySelector("#topics").innerHTML = " "; 
+				//feature: add "Return to Topics "button that puts the TOPic buttons back 
+				//next: make write button work so note space appears 
+ 	 	}) 	 // add catch 	
  	 })
- 	 // add catch
+ 	
 }
 
-// function renderSiteCard() {
-// 	console.log("got to renderSiteCard")
-// }
+
