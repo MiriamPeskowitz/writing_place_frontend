@@ -63,7 +63,11 @@ function fetchSites(id) {
  	 	let allSites = sites.data.attributes.sites
  	 	console.log("allSites: ", allSites)
  	 	allSites.forEach(site => {
- 	 			console.log(site.name, site.id)
+ 	 			// console.log(site.name, site.id)
+ 	 			let newSite = new Site(site)
+ 	 			// console.log(newSite)
+	 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
+
  	 			// renderSiteCard()
  	 	})
  	 	//site.topic_id = id or site.data.topic_id
@@ -71,21 +75,7 @@ function fetchSites(id) {
  	 })
  	 // add catch
 }
-//sample code for iterating though 
-// .then(topics => {
-// 		console.log("topics data: ", topics)
-// 		// structure = data.attributes.name
-// 		topics.data.forEach(topic => {
-			
-// 			let newTopic = new Topic(topic, topic.attributes)
-// 			console.log("topic: ", newTopic.name)
-		
-// 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
 
-// 		})
-// 		//add catch
-// 	})
-
-function renderSiteCard() {
-	console.log("got to renderSiteCard")
-}
+// function renderSiteCard() {
+// 	console.log("got to renderSiteCard")
+// }
