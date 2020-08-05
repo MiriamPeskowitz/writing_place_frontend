@@ -59,33 +59,18 @@ function fetchSites(id) {
  
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	console.log("sites data: ", sites)
  	 	let allSites = sites.data.attributes.sites
- 	 	console.log("allSites: ", allSites)
  	 	allSites.forEach(site => {
- 	 			console.log(site.name, site.id)
- 	 			// renderSiteCard()
- 	 	})
- 	 	//site.topic_id = id or site.data.topic_id
- 	 	
+ 	 			// console.log(site.name, site.id)
+ 	 			let newSite = new Site(site)
+ 	 			// console.log(newSite)
+	 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
+	 			document.querySelector("#topics").innerHTML = " "; 
+				//feature: add "Return to Topics "button that puts the TOPic buttons back 
+				//next: make write button work so note space appears 
+ 	 	}) 	 // add catch 	
  	 })
- 	 // add catch
+ 	
 }
-//sample code for iterating though 
-// .then(topics => {
-// 		console.log("topics data: ", topics)
-// 		// structure = data.attributes.name
-// 		topics.data.forEach(topic => {
-			
-// 			let newTopic = new Topic(topic, topic.attributes)
-// 			console.log("topic: ", newTopic.name)
-		
-// 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
 
-// 		})
-// 		//add catch
-// 	})
 
-function renderSiteCard() {
-	console.log("got to renderSiteCard")
-}
