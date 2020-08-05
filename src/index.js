@@ -6,36 +6,49 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
 
 	fetchTopics()
-	fetchSites()
+	writeButtonHandler()
 
-
-	
+//when topic button is clicked, sites show up on the page
+	document.querySelector(".write-button")
 })
 
-// "topics"
+
 function fetchTopics() {
 	console.log("fetch Topics")
 	fetch(topicsEndPoint)
 	.then(response => response.json())
 	.then(topics => {
-		
-		// data.attributes.name
+		console.log("topics: ", topics)
+		// structure = data.attributes.name
 		topics.data.forEach(topic => {
 			
-			let newTopic = new Topic(topic.attributes)
+			let newTopic = new Topic(topic, topic.attributes)
 			console.log("topics: ", newTopic.name)
-			//put it on the DOME
+		
 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
 
 		})
-		// MAKE TOPIC CLASS 
-		
-		})
+		//add catch
+	})
 }
 
+//add button handler to get the id from e.target.dataset 
+function writeButtonHandler() {
+	document.addEventListener('click', (e) => {
+		if (e.target.className == "write-button") {
+			// console.log(e.target.dataset.id)
+			//found the exact id of that whole class that I want: 
+			let id = e.target.dataset.id
+			fetchSites(id)
+		}
+	} )
+}
 
-function fetchSites() {
-	fetch(sitesEndPoint)
+//start here -- get the endpoint right 
+function fetchSites(id) {
+	fetch(`sitesEndPoint/${id}`) //interpolation 
+	// /sites/7. 
+	.then(console.log("fetch sites worked"))
  	 .then(response => response.json())
  	 .then(sites => {
  	 	console.log("sites: ", sites )
