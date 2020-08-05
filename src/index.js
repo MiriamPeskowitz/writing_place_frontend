@@ -6,39 +6,86 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
 
 	fetchTopics()
-	fetchSites()
+	writeButtonHandler()
 
-
-	
+//when topic button is clicked, sites show up on the page
+//put it belo
+	// document.querySelector(".write-button")
 })
 
-// "topics"
+
 function fetchTopics() {
 	console.log("fetch Topics")
 	fetch(topicsEndPoint)
 	.then(response => response.json())
 	.then(topics => {
-		
-		// data.attributes.name
+		console.log("topics data: ", topics)
+		// structure = data.attributes.name
 		topics.data.forEach(topic => {
 			
-			let newTopic = new Topic(topic.attributes)
-			console.log("topics: ", newTopic.name)
-			//put it on the DOME
+			let newTopic = new Topic(topic, topic.attributes)
+			console.log("topic: ", newTopic.name)
+		
 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
 
 		})
-		// MAKE TOPIC CLASS 
-		
-		})
+		//add catch
+	})
 }
 
+//add button handler to get the id from e.target.dataset 
+function writeButtonHandler() {
+	document.addEventListener('click', (e) => {
+		if (e.target.className == "write-button") {
+			// console.log(e.target.dataset.id)
+			//found the exact id of that whole class that I want: 
+			let id = e.target.dataset.id
+			fetchSites(id)
+		}
+	} )
+}
+// 'http://localhost:3000/users/`${current_user.id}`/events',
+//start here -- get the endpoint right 
+function fetchSites(id) {
+	// console.log(id)
+	console.log(topicsEndPoint +`/${id}`)
+	fetch(topicsEndPoint +`/${id}`) 
+	//check association, can i do topic.relationships.sites.data.id ---- 
+	//or call data.relationships.topic.data.id == id
 
-function fetchSites() {
-	fetch(sitesEndPoint)
+	// .then(console.log("fetch sites worked"))
+	//next: get full topic.site data to fetch, and make cards to render each of the 8
+	//do a fetch topics like the fetch sites above, with class and renderTopicsCard 
+ 
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	console.log("sites: ", sites )
+ 	 	console.log("sites data: ", sites)
+ 	 	let allSites = sites.data.attributes.sites
+ 	 	console.log("allSites: ", allSites)
+ 	 	allSites.forEach(site => {
+ 	 			console.log(site.name, site.id)
+ 	 			// renderSiteCard()
+ 	 	})
+ 	 	//site.topic_id = id or site.data.topic_id
+ 	 	
  	 })
  	 // add catch
+}
+//sample code for iterating though 
+// .then(topics => {
+// 		console.log("topics data: ", topics)
+// 		// structure = data.attributes.name
+// 		topics.data.forEach(topic => {
+			
+// 			let newTopic = new Topic(topic, topic.attributes)
+// 			console.log("topic: ", newTopic.name)
+		
+// 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
+
+// 		})
+// 		//add catch
+// 	})
+
+function renderSiteCard() {
+	console.log("got to renderSiteCard")
 }
