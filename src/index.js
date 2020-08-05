@@ -43,11 +43,16 @@ function writeButtonHandler() {
 		}
 	} )
 }
-
+// 'http://localhost:3000/users/`${current_user.id}`/events',
 //start here -- get the endpoint right 
 function fetchSites(id) {
-	fetch(`sitesEndPoint/${id}`) //interpolation 
+	// console.log(id)
+	console.log(topicsEndPoint +`/${id}`)
+	fetch(topicsEndPoint +`/${id}`) //interpolation 
 	// /sites/7. 
+	//check association, can i do topic.relationships.sites.data.id ---- 
+	//or call data.relationships.topic.data.id == id
+
 	.then(console.log("fetch sites worked"))
  	 .then(response => response.json())
  	 .then(sites => {
