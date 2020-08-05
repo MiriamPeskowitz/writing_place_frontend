@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	writeButtonHandler()
 
 //when topic button is clicked, sites show up on the page
-	document.querySelector(".write-button")
+	// document.querySelector(".write-button")
 })
 
 
@@ -53,7 +53,10 @@ function fetchSites(id) {
 	//check association, can i do topic.relationships.sites.data.id ---- 
 	//or call data.relationships.topic.data.id == id
 
-	.then(console.log("fetch sites worked"))
+	// .then(console.log("fetch sites worked"))
+	//next: get full topic.site data to fetch, and make cards to render each of the 8
+	
+
  	 .then(response => response.json())
  	 .then(sites => {
  	 	console.log("sites: ", sites )
