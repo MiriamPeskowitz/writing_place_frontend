@@ -66,8 +66,8 @@ function fetchSites(id) {
 			const button = document.querySelector(".save-note-button")
 			button.addEventListener('click', (e) => createNoteFormHandler(e))
 
- 	 	}) 	 // add catch 	
- 	 })
+ 	 	}) 		
+ 	 }).catch(error => console.log(error))
 }
 
 //4 event listener for "save-note-button"
