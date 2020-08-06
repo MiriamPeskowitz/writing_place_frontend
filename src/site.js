@@ -14,14 +14,14 @@ class Site {
 			<p>${this.id}. ${this.name}</p>
 			<img src=${this.image}>
 			<p>${this.description}</p>
-			<section id="note-form">
-				<form data-id=${this.id}>
-				   <label>My Writing, near ${this.name}</label><br><br>
-		  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
-					<br>
-					<button type='submit'>Save Note</button>
-				</form>	
-			</section>
+			
+			<form data-id=${this.id}>
+			   <label>My Writing, near ${this.name}</label><br><br>
+	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
+				<br>
+				<button type='submit'>Save Note</button>
+			</form>	
+			
 			<button id="return-to-topics">Coming Soon: Back to Topics</button>	
 			`	
 	}	
