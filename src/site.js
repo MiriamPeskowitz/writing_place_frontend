@@ -24,38 +24,10 @@ class Site {
 			
 			<button id="return-to-topics">Coming Soon: Back to Topics</button>	
 			`	
-	}	
-
-// <button class="site-to-show-page-button" data-id=${this.id}>Visit/Write about this site</button>
-
-//how to do the note 
-	// renderNoteForm() {
-	// 	return ` 
-	// 		<form data-id=${this.id}>
-	// 		   <label>My Writing, near ${this.name}</label><br><br>
-	//   	       <textarea id="noteBody" name="note" rows="50" cols="50"></textarea>
-	// 			<button type='submit'>Save Note</button>
-	// 			<button id="return-to-list">Return to List (w/o saving)</button>
-	// 		</form>	
-	// 		`
-	// }
-
+	}
 }
-			//feature make this button return to topics and make them visible, and make the sites cards disappear 
-
-			// feature: in CSS, add border around each card, get them to stack up, etc
-	
-// 	renderSiteNotesCord() {
-// 		console.log('render site notes card ')
-// 		const writingCard =  `
-// 			<form data-id=${this.noteId}>
-// 			   <label>My Writing, near ${this.name}</label><br><br>
-// 	  	       <textarea id="noteBody" name="note" rows="50" cols="50"></textarea>
-		   
-// 				<button type='submit'>Save Note</button>
-// 				<button id="return-to-list">Return to List (w/o saving)</button>
-// 			</form>`
-// 		return writingCard	
-// }
-//then put it somewhere in the DOM -- right beneath, appended below the data already there. 
 Site.all = []
+//feature make this button return to topics and make them visible, and make the sites cards disappear 
+
+// feature: in CSS, add border around each card, get them to stack up, etc
+	

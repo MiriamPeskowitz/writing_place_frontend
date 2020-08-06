@@ -70,9 +70,7 @@ function fetchSites(id) {
  	 }).catch(error => console.log(error))
 }
 
-//4 event listener for "save-note-button"
-
-//Wed night: FIGURE OUT HOW I GET HERE USER CLICKS THE SAVE BUTTON -
+//4 event listener for "save-note-button", grabs data, sends to PostFetch request 
 // Check all the values, it's something like this 
 function createNoteFormHandler(e) {
 	e.preventDefault()
@@ -84,13 +82,11 @@ function createNoteFormHandler(e) {
 	}
 }
 
+// Start here on Thursday 
 function postNote() {
 	console.log('got to postNote')
 }
-// const saveNote = document.querySelector("#notes-button")
-// 	openNote.addEventListener("click", () => renderNoteForm())
-// 	document.querySelector('#notes').innerHTML = site.renderNoteForm()
-// }
+
 
 
 
