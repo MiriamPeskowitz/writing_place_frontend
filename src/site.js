@@ -17,9 +17,9 @@ class Site {
 			
 			<form data-id=${this.id}>
 			   <label>My Writing, near ${this.name}</label><br><br>
-	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
+	  	       <textarea id="note-body" name="note" rows="30" cols="50"></textarea>
 				<br>
-				<button data-id=${this.id} type='submit'>Save Note</button>
+				<button class="save-note-button" data-id=${this.id} >Save Note</button>
 			</form>	
 			
 			<button id="return-to-topics">Coming Soon: Back to Topics</button>	

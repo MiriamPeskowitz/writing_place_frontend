@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-// document.addEventListener noteButtonHandler()
+// what to do with this? Clarify document.addEventListener noteButtonHandler()
 function noteButtonHandler() {
 	const openNote = document.querySelector("#notes-button")
 	openNote.addEventListener("click", () => renderNoteForm())
@@ -63,9 +63,34 @@ function fetchSites(id) {
  			document.querySelector("#topics").style.display = "none"; 
 			//find the css that collapses the space, too, display = none, visibility = visible
 			//next: make write button work so note space appears 
+			const button = document.querySelector(".save-note-button")
+			button.addEventListener('click', (e) => createNoteFormHandler(e))
+
  	 	}) 	 // add catch 	
  	 })
 }
+
+//4 event listener for "save-note-button"
+
+//Wed night: FIGURE OUT HOW I GET HERE USER CLICKS THE SAVE BUTTON -
+// Check all the values, it's something like this 
+function createNoteFormHandler(e) {
+	e.preventDefault()
+	const noteBodyInput = document.querySelector("#note-body").value
+	console.log(noteBodyInput)
+	if (e.target.className == "save-note-button") {
+		let siteId = e.target.dataset.id
+		postNote(noteBodyInput, siteId)
+	}
+}
+
+function postNote() {
+	console.log('got to postNote')
+}
+// const saveNote = document.querySelector("#notes-button")
+// 	openNote.addEventListener("click", () => renderNoteForm())
+// 	document.querySelector('#notes').innerHTML = site.renderNoteForm()
+// }
 
 
 
