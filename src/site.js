@@ -12,14 +12,14 @@ class Site {
 	renderSiteCard() {
 		return  `
 			<p>${this.id}. ${this.name}</p>
-			<img src=${this.image}>
+			<img src=${this.image} height="300" width="300">
 			<p>${this.description}</p>
 			
 			<form data-id=${this.id}>
 			   <label>My Writing, near ${this.name}</label><br><br>
 	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
 				<br>
-				<button type='submit'>Save Note</button>
+				<button data-id=${this.id} type='submit'>Save Note</button>
 			</form>	
 			
 			<button id="return-to-topics">Coming Soon: Back to Topics</button>	

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
 
 	fetchTopics()
-	writeButtonHandler()
+	sitesButtonHandler()
 	
 
 })
@@ -38,7 +38,7 @@ function fetchTopics() {
 
 
 //2 add button handler to get the id from e.target.dataset 
-function writeButtonHandler() {
+function sitesButtonHandler() {
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "write-button") {
 			// console.log(e.target.dataset.id)
