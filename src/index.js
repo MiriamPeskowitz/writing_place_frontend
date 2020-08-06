@@ -7,13 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	fetchTopics()
 	writeButtonHandler()
+	
 
-//when topic button is clicked, sites show up on the page
-//put it belo
-	// document.querySelector(".write-button")
 })
 
-
+// document.addEventListener noteButtonHandler()
+function noteButtonHandler() {
+	const openNote = document.querySelector("#notes-button")
+	openNote.addEventListener("click", () => renderNoteForm())
+	document.querySelector('#notes').innerHTML = site.renderNoteForm()
+}
+// 1
 function fetchTopics() {
 	console.log("fetch Topics")
 	fetch(topicsEndPoint)
@@ -27,13 +31,13 @@ function fetchTopics() {
 			console.log("topic: ", newTopic.name)
 		
 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
-
 		})
-		//add catch
 	})
+	.catch(error => console.log(error))
 }
 
-//add button handler to get the id from e.target.dataset 
+
+//2 add button handler to get the id from e.target.dataset 
 function writeButtonHandler() {
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "write-button") {
@@ -44,33 +48,24 @@ function writeButtonHandler() {
 		}
 	} )
 }
-// 'http://localhost:3000/users/`${current_user.id}`/events',
-//start here -- get the endpoint right 
-function fetchSites(id) {
-	// console.log(id)
-	console.log(topicsEndPoint +`/${id}`)
-	fetch(topicsEndPoint +`/${id}`) 
-	//check association, can i do topic.relationships.sites.data.id ---- 
-	//or call data.relationships.topic.data.id == id
 
-	// .then(console.log("fetch sites worked"))
-	//next: get full topic.site data to fetch, and make cards to render each of the 8
-	//do a fetch topics like the fetch sites above, with class and renderTopicsCard 
- 
+// 3
+function fetchSites(id) {
+	console.log(topicsEndPoint +`/${id}`)
+	fetch(topicsEndPoint +`/${id}`)  
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	let allSites = sites.data.attributes.sites
+ 	 	let allSites = sites.data.attributes.sites 	
  	 	allSites.forEach(site => {
- 	 			// console.log(site.name, site.id)
- 	 			let newSite = new Site(site)
- 	 			// console.log(newSite)
-	 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
-	 			document.querySelector("#topics").innerHTML = " "; 
-				//feature: add "Return to Topics "button that puts the TOPic buttons back 
-				//next: make write button work so note space appears 
+	 		let newSite = new Site(site)
+ 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
+ 			//hide the topics: 
+ 			document.querySelector("#topics").style.display = "none"; 
+			//find the css that collapses the space, too, display = none, visibility = visible
+			//next: make write button work so note space appears 
  	 	}) 	 // add catch 	
  	 })
- 	
 }
+
 
 
