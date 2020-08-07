@@ -14,10 +14,10 @@ class Site {
 			<p>${this.id}. ${this.name}</p>
 			<img src=${this.image} height="300" width="300">
 			<p>${this.description}</p>
-			
+			*******************
 			<form data-id=${this.id}>
 			   <label>My Writing, near ${this.name}</label><br><br>
-	  	       <textarea id="note-body" name="note" rows="30" cols="50"></textarea>
+	  	       <textarea id="note-body" name="note" rows="10" cols="50"></textarea>
 				<br>
 				<button class="save-note-button" data-id=${this.id} >Save Note</button>
 			</form>	

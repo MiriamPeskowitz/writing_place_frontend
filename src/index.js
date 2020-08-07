@@ -99,7 +99,8 @@ function postNote(body, site_id) {
 	.then(note => {
 		console.log("note: ", note)
 		const noteData = note.data
-		let newNote = new Note(noteData)
+		let newNote = new Note(noteData, noteData.attributes)
+		console.log(newNote)
 		document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
 	})
 	.catch(error => console.log(error))
