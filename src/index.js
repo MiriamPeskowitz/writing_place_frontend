@@ -4,12 +4,8 @@ const notesEndPoint = "http://localhost:3000/api/v1/notes"
 const endPoint = "http://localhost:3000/api/v1"
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log('loaded')
-
 	fetchTopics()
 	sitesButtonHandler()
-	
-
 })
 
 // what to do with this? Clarify document.addEventListener noteButtonHandler()
@@ -101,7 +97,8 @@ function postNote(body, site_id) {
 		const noteData = note.data
 		let newNote = new Note(noteData, noteData.attributes)
 		console.log(newNote)
-		document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
+		//what's the goal: keep it in the area, start collecting it for the big one. 
+		// document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
 	})
 	.catch(error => console.log(error))
 }
