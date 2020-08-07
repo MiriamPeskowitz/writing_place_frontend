@@ -96,9 +96,9 @@ function postNote(body, site_id) {
 		console.log("note: ", note)
 		const noteData = note.data
 		let newNote = new Note(noteData, noteData.attributes)
-		console.log(newNote)
+		console.log("newNote: ", newNote)
 		//what's the goal: keep it in the area, start collecting it for the big one. 
-		// document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
+		document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
 	})
 	.catch(error => console.log(error))
 }
