@@ -1,5 +1,6 @@
 const sitesEndPoint = "http://localhost:3000/api/v1/sites"
 const topicsEndPoint = "http://localhost:3000/api/v1/topics"
+const notesEndPoint = "http://localhost:3000/api/v1/notes"
 const endPoint = "http://localhost:3000/api/v1"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,17 +76,62 @@ function fetchSites(id) {
 function createNoteFormHandler(e) {
 	e.preventDefault()
 	const noteBodyInput = document.querySelector("#note-body").value
-	console.log(noteBodyInput)
+	// console.log(noteBodyInput)
 	if (e.target.className == "save-note-button") {
 		let siteId = e.target.dataset.id
+		// console.log(siteId)
+		let topic_id = 
 		postNote(noteBodyInput, siteId)
 	}
 }
 
 // Start here on Thursday 
-function postNote() {
-	console.log('got to postNote')
+function postNote(body, site_id) {
+	console.log('body, site_id: ', body, site_id)
+	let bodyData = {body, site_id}
+	//need to add topic
+	fetch(notesEndPoint, {
+		method: "POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify(bodyData)
+	})
+	.then(response => response.json())
+	.then(note => {
+		console.log("note: ", note)
+		const noteData = note.data
+		let newNote = new Note(noteData)
+		document.querySelector("#notes").innerHTML =+ newNote.renderNoteCard();
+	})
+	.catch(error => console.log(error))
 }
+// will be something like this: make sure names fit backend Ruby 
+// function postSyllabus(title, description, image_url, category_id) {
+// 	//make image_url and category_id snakecase, even though it's JS => 
+//   // confirm these values are coming through properly
+//   console.log(title, description, image_url, category_id);
+//   // build body object
+//   let bodyData = {title, description, image_url, category_id}
+//   fetch(endPoint, {
+// 	    // POST request
+// 	    method: "POST",
+// 	    headers: {"Content-Type": "application/json"},
+// 	    body: JSON.stringify(bodyData)
+// 	  })
+// 	  .then(response => response.json())
+// 	  .then(syllabus => {
+// 		console.log(syllabus)
+// 		const syllabusData = syllabus.data
+// 		//becuase of how it's nested 
+// 	  	let newSyllabus = new Syllabus(syllabusData, syllabusData.attributes)
+// 		document.querySelector('#syllabus-container').innerHTML += newSyllabus.renderSyllabusCard();
+
+// 	   //  console.log("new data: ", syllabus);
+// 	   //  const syllabusData = syllabus.data
+// 	   //  // render JSON response
+// 	   // render(syllabusData)
+//   	})
+// 	.catch(error => console.log(error))
+//  }
 
 
 
