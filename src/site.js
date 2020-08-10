@@ -15,11 +15,12 @@ class Site {
 			<img src=${this.image}>
 			<p>${this.description}</p>
 			
-			<form data-id=${this.id}>
+			<form>
 			   <label>My Writing, near ${this.name}</label><br><br>
+			   <p id="completed-text"></p>
 	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
 				<br>
-				<button type='submit'>Save Note</button>
+				<button class="save-note" type='submit' data-id=${this.id}>Save Note</button>
 			</form>	
 			
 			<button id="return-to-topics">Coming Soon: Back to Topics</button>	
