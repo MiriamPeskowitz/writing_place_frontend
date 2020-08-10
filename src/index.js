@@ -44,6 +44,7 @@ function writeButtonHandler() {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
+			console.log("id: ", id)
 			fetchSites(id)
 		}
 	} )
