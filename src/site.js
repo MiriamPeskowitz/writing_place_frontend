@@ -14,10 +14,9 @@ class Site {
 			<p>${this.id}. ${this.name}</p>
 			<img src=${this.image}>
 			<p>${this.description}</p>
-			
-			<form>
-			   <label>My Writing, near ${this.name}</label><br><br>
-			   <p id="completed-text"></p>
+			 <label>My Writing, near ${this.name}</label><br><br>
+			<div id="completed-text" ></div>
+			<form data-site-id=${this.id}>
 	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
 				<br>
 				<button class="save-note" type='submit' data-id=${this.id}>Save Note</button>

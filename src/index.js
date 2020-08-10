@@ -90,7 +90,7 @@ function getNoteData(e) {
 
 //4 user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
 function postNote(body, site_id) {
-	console.log("got to postNote")
+	// console.log("got to postNote")
 	console.log('body, site_id: ', body, site_id)
 	let bodyData = {body, site_id}
 	fetch(notesEndPoint, {
@@ -104,11 +104,25 @@ function postNote(body, site_id) {
 		const noteData = note.data
 		let newNote = new Note(noteData, noteData.attributes)
 		console.log("newNote: ", newNote)
+		placeNote = document.getElementById("completed-text")
+		placeNote.innerHTML = newNote.body
+		placeNote.setAttribute('data-id',newNote.id )
 // 		//what's the goal: keep it in the area, start collecting it for the big one. 
-		document.querySelector("#notes").innerHTML =+ newNote
-		document.querySelector("#noteBody").value = ""
+		clear()
 	})
 	.catch(error => console.log(error))
 }
-// should be site: 
+// NEXT: should it be Note 
 		//At the end: feature: text appears, above where the note was, #noteBody.innerHTML = ''
+		// give form an id and close it up. If id
+function clear() {
+
+		document.querySelector("#noteBody").value = ""
+		document.querySelector('form').style.display = "none";
+		addEditButton()
+	
+}
+
+function addEditButton() {
+	
+}
