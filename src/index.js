@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 1
 function fetchTopics() {
-	console.log("fetch Topics")
+	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
 	.then(response => response.json())
 	.then(topics => {
-		console.log("topics data: ", topics)
+		// console.log("topics data: ", topics)
 		// structure = data.attributes.name
 		topics.data.forEach(topic => {
 			
 			let newTopic = new Topic(topic, topic.attributes)
-			console.log("topic: ", newTopic.name)
+			// console.log("topic: ", newTopic.name)
 		
 			document.querySelector('#topics').innerHTML += newTopic.renderTopicCard()
 		})
@@ -40,7 +40,7 @@ function writeButtonHandler() {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
-			console.log("id: ", id)
+			// console.log("id: ", id)
 			fetchSites(id)
 		}
 	} )
@@ -74,14 +74,14 @@ function getNoteData(e) {
 	e.preventDefault()
 
 	const noteBodyInput = document.querySelector("#noteBody").value
-	console.log("noteBody :", noteBodyInput)
+	// console.log("noteBody :", noteBodyInput)
 
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "save-note") {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
-			console.log("site-id: ", id)
+			// console.log("site-id: ", id)
 			postNote(noteBodyInput, id)	
 		}
 	})
@@ -90,8 +90,7 @@ function getNoteData(e) {
 
 //4 user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
 function postNote(body, site_id) {
-	// console.log("got to postNote")
-	console.log('body, site_id: ', body, site_id)
+	// console.log('body, site_id: ', body, site_id)
 	let bodyData = {body, site_id}
 	fetch(notesEndPoint, {
 		method: "POST",
@@ -100,29 +99,46 @@ function postNote(body, site_id) {
 	})
 	.then(response => response.json())
 	.then(note => {
-		console.log("note: ", note)
+		// console.log("note: ", note)
 		const noteData = note.data
 		let newNote = new Note(noteData, noteData.attributes)
-		console.log("newNote: ", newNote)
+		// console.log("newNote: ", newNote)
 		placeNote = document.getElementById("completed-text")
 		placeNote.innerHTML = newNote.body
-		placeNote.setAttribute('data-id',newNote.id )
-// 		//what's the goal: keep it in the area, start collecting it for the big one. 
+		placeNote.setAttribute('data-id',newNote.id)
 		clear()
 	})
 	.catch(error => console.log(error))
 }
-// NEXT: should it be Note 
-		//At the end: feature: text appears, above where the note was, #noteBody.innerHTML = ''
+//add it so that your new writing will appear next time fetch is called on. 
+
 		// give form an id and close it up. If id
 function clear() {
+		emptyNoteBody()
+		hideNoteForm()
+		addEditButton()	
+}
 
-		document.querySelector("#noteBody").value = ""
-		document.querySelector('form').style.display = "none";
-		addEditButton()
-	
+function emptyNoteBody() {
+	document.querySelector("#noteBody").value = ""
+}
+
+function hideNoteForm() {
+	document.querySelector('form').style.display = "none";
 }
 
 function addEditButton() {
-	
+	let editButton = document.createElement("button")
+	editButton.innerHTML = (`Coming Soon: Edit/Add More </button>`)	
+	// editButton.addAttribute -- data-id
+	let buttonSection = document.getElementById("buttons")
+	buttonSection.appendChild(editButton)
+}
+
+function backToTopicsButton() {
+	console.log("back to topics")
+	//attach eventHandler to button 
+	//hid sites, show Topics 
+	// section id="notes" => style.display = "none"
+	//toggle this: document.querySelector("#topics").style.display = "none"; Try display: unset or display: revert or display: normal or display: block 
 }

@@ -21,8 +21,9 @@ class Site {
 				<br>
 				<button class="save-note" type='submit' data-id=${this.id}>Save Note</button>
 			</form>	
-			
-			<button id="return-to-topics">Coming Soon: Back to Topics</button>	
+			<div id="buttons">
+				<button id="return-to-topics">Coming Soon: Back to Topics</button>	
+			</div>
 			`	
 	}	
 
