@@ -6,57 +6,26 @@ class Site {
 		this.image = site.image_url
 		this.description = site.description
 
-
 		Site.all.push(this)
 	}
 	renderSiteCard() {
 		return  `
-			<p>${this.id}. ${this.name}</p>
+		  <section data-id=${this.id}>	
+			<h3>${this.id}. ${this.name}</h3>
 			<img src=${this.image}>
 			<p>${this.description}</p>
-			 <label>My Writing, near ${this.name}</label><br><br>
-			<div id="completed-text" ></div>
-			<form data-site-id=${this.id}>
-	  	       <textarea id="noteBody" name="note" rows="30" cols="50"></textarea>
+			<h4>My Writing, near ${this.name}</h4>
+			<br><br>
+			<div id="completed-text"></div>
+			<form id="note-form" data-id=${this.id}>
+	  	       <textarea id="noteBody" name="note" rows="20" cols="50"></textarea>
 				<br>
 				<button class="save-note" type='submit' data-id=${this.id}>Save Note</button>
 			</form>	
 			<div id="buttons">
 				<button id="return-to-topics">Coming Soon: Back to Topics</button>	
 			</div>
-			`	
-	}	
-
-// <button class="site-to-show-page-button" data-id=${this.id}>Visit/Write about this site</button>
-
-//how to do the note 
-	// renderNoteForm() {
-	// 	return ` 
-	// 		<form data-id=${this.id}>
-	// 		   <label>My Writing, near ${this.name}</label><br><br>
-	//   	       <textarea id="noteBody" name="note" rows="50" cols="50"></textarea>
-	// 			<button type='submit'>Save Note</button>
-	// 			<button id="return-to-list">Return to List (w/o saving)</button>
-	// 		</form>	
-	// 		`
-	// }
-
-}
-			//feature make this button return to topics and make them visible, and make the sites cards disappear 
-
-			// feature: in CSS, add border around each card, get them to stack up, etc
-	
-// 	renderSiteNotesCord() {
-// 		console.log('render site notes card ')
-// 		const writingCard =  `
-// 			<form data-id=${this.noteId}>
-// 			   <label>My Writing, near ${this.name}</label><br><br>
-// 	  	       <textarea id="noteBody" name="note" rows="50" cols="50"></textarea>
-		   
-// 				<button type='submit'>Save Note</button>
-// 				<button id="return-to-list">Return to List (w/o saving)</button>
-// 			</form>`
-// 		return writingCard	
-// }
-//then put it somewhere in the DOM -- right beneath, appended below the data already there. 
+		  </section>`	
+	}
+}	
 Site.all = []
