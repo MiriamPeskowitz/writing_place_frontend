@@ -5,12 +5,15 @@ class Site {
 		this.name = site.name
 		this.image = site.image_url
 		this.description = site.description
+		// add these so that 
+		// add note.body = site
+		//add this.noteId = site.
 
 		Site.all.push(this)
 	}
 	renderSiteCard() {
 		return  `
-		  <section data-id=${this.id}>	
+		  <section>	
 			<h3>${this.id}. ${this.name}</h3>
 			<img src=${this.image}>
 			<p>${this.description}</p>
@@ -28,4 +31,6 @@ class Site {
 		  </section>`	
 	}
 }	
+
+
 Site.all = []
