@@ -61,18 +61,17 @@ function fetchSites(id) {
 			//find the css that collapses the space, too, display = none, visibility = visible
 			//next: make write button work so note space appears 
 			const button = document.querySelector(".save-note")
-			button.addEventListener('click', (e) => getNoteData(e))
-
+			let siteId = site.id
+			button.addEventListener('click', (e) => getNoteData(e, siteId))
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
-// function makeNoteSaveButton() {
 
-// }
 
-function getNoteData(e) {
+function getNoteData(e, siteId) {
+	console.log(e)
 	e.preventDefault()
-
+	
 	const noteBodyInput = document.querySelector("#noteBody").value
 	// console.log("noteBody :", noteBodyInput)
 
@@ -81,16 +80,17 @@ function getNoteData(e) {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
-			// console.log("site-id: ", id)
-			postNote(noteBodyInput, id)	
+			console.log("site-id: ", id)
+			postNote(e, noteBodyInput, id)	
 		}
 	})
 }
 
 
 //4 user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
-function postNote(body, site_id) {
-	// console.log('body, site_id: ', body, site_id)
+function postNote(e, body, site_id) {
+	e.preventDefault()
+	console.log('body, site_id: ', body, site_id)
 	let bodyData = {body, site_id}
 	fetch(notesEndPoint, {
 		method: "POST",
@@ -99,13 +99,14 @@ function postNote(body, site_id) {
 	})
 	.then(response => response.json())
 	.then(note => {
+		
 		// console.log("note: ", note)
 		const noteData = note.data
 		let newNote = new Note(noteData, noteData.attributes)
-		// console.log("newNote: ", newNote)
+		console.log("newNote: ", newNote)
 		placeNote = document.getElementById("completed-text")
 		placeNote.innerHTML = newNote.body
-		placeNote.setAttribute('data-id',newNote.id)
+		// placeNote.setAttribute('data-id',newNote.id)
 		clear()
 	})
 	.catch(error => console.log(error))
@@ -142,3 +143,6 @@ function backToTopicsButton() {
 	// section id="notes" => style.display = "none"
 	//toggle this: document.querySelector("#topics").style.display = "none"; Try display: unset or display: revert or display: normal or display: block 
 }
+
+
+//Works for site #1, but not for the others. Figure out why, and fix

@@ -3,7 +3,7 @@ class Note {
 		this.id = parseInt(note.id)
 		this.body = noteAttributes.body
 		this.title = noteAttributes.title
-		this.siteId = noteAttributes.site_id
+		this.siteId = noteAttributes.site.id
 
 		Note.all.push(this)
 	}
