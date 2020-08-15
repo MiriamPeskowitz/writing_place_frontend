@@ -8,18 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	fetchTopics()
 	writeButtonHandler()
-	
-
 })
 
 
-// 1
+// 1 -- fine, makes the topic list 
 function fetchTopics() {
 	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
 	.then(response => response.json())
 	.then(topics => {
-		// console.log("topics data: ", topics)
+		console.log("topics data: ", topics)
 		// structure = data.attributes.name
 		topics.data.forEach(topic => {
 			
@@ -35,6 +33,7 @@ function fetchTopics() {
 
 //2 add button handler to get the id from e.target.dataset 
 function writeButtonHandler() {
+	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "write-button") {
 			// console.log(e.target.dataset.id)
@@ -46,30 +45,89 @@ function writeButtonHandler() {
 	} )
 }
 
-// 3
+//try again with this, because I need it to render by topic 
+
+// function writeButtonHandler() {
+// 	document.addEventListener('click', (e) => {
+// 		if (e.target.className == "write-button") {
+// 			// console.log(e.target.dataset.id)
+// 			//found the exact id of that whole class that I want: 
+// 			let id = e.target.dataset.id
+// 			// console.log("id: ", id)
+// 			fetchSites(id)
+// 		}
+// 	} )
+// }
+
+// // // 3
+// function fetchSites(id) {
+// 	console.log(topicsEndPoint +`/${id}`)
+// 	fetch(topicsEndPoint +`/${id}`)  
+//  	 .then(response => response.json())
+//  	 .then(json => {
+//  	 	// console.log("json: ", json)
+//  	 	// let allSites = data.attributes 	
+//  	 	//notes are data.attributes.notes -- array, id/title/body/site_id 
+//  	 	//sites are s
+//  	 	// console.log("allSites: ", allSites)
+//  	 	json.forEach(site => {
+// 	 		let newSite = new Site(site)
+//  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
+//  			//hide the topics: 
+//  			document.querySelector("#topics").style.display = "none"; 
+// 			//find the css that collapses the space, too, display = none, visibility = visible
+// 			//next: make write button work so note space appears 
+// 			const button = document.querySelector(".save-note")
+// 			let siteId = site.id
+// 			button.addEventListener('click', (e) => getNoteData(e, siteId))
+//  	 	}) 	
+//  	 }).catch(error => console.log(error))
+// }
+
+
+
+
+// 3 This is through sites -- and change render site card to renderSiteList
 function fetchSites(id) {
-	console.log(topicsEndPoint +`/${id}`)
-	fetch(topicsEndPoint +`/${id}`)  
+	console.log('fetched')
+
+	fetch(sitesEndPoint)  
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	let allSites = sites.data.attributes.sites 	
+ 	 	//if (site.topic_id === id)
+ 	 	let allSites = sites.data
+ 	 	// console.log("allSites: ", allSites)
+
  	 	allSites.forEach(site => {
+ 	 		if (site.relationships.topic.data.id === id) {
 	 		let newSite = new Site(site)
- 			document.querySelector('#sites').innerHTML += newSite.renderSiteCard()
+
+	 		// console.log("newSite: ", newSite)
+ 			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
+ 
  			//hide the topics: 
- 			document.querySelector("#topics").style.display = "none"; 
+ 			document.querySelector("#topics").style.display = "none";  
 			//find the css that collapses the space, too, display = none, visibility = visible
-			//next: make write button work so note space appears 
-			const button = document.querySelector(".save-note")
-			let siteId = site.id
-			button.addEventListener('click', (e) => getNoteData(e, siteId))
+
+			const seeSitesButton = document.getElementById("open-form")
+			// let siteId = site.id
+			
+			let topicId = newSite.topicId
+			// console.log(siteId)
+			
+			seeSitesButton.addEventListener('click', (e) => handleFormOpener(e,  topicId))
+			}
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
 
+function handleFormOpener(e, topicId) {
+	const id = e.target.dataset.id
+	console.log("siteId, topciId:" , id, topicId)	
+}
 
 function getNoteData(e, siteId) {
-	console.log(e)
+	console.log(e, siteId)
 	e.preventDefault()
 	
 	const noteBodyInput = document.querySelector("#noteBody").value
@@ -138,11 +196,31 @@ function addEditButton() {
 
 function backToTopicsButton() {
 	console.log("back to topics")
+	// document.querySelector('topics').style.display = "block";
 	//attach eventHandler to button 
 	//hid sites, show Topics 
 	// section id="notes" => style.display = "none"
 	//toggle this: document.querySelector("#topics").style.display = "none"; Try display: unset or display: revert or display: normal or display: block 
 }
 
+//HANDLE FORM SUBMIT
+ // handleFormSubmit(e) {
+ //    e.preventDefault();
+ //    const id = e.target.dataset.id;
+ //    const note = Note.findById(id);
+ //    const title = $(e.target)
+ //      .find('input')
+ //      .val();
+ //    const content = $(e.target)
+ //      .find('textarea')
+ //      .val();
 
+ //    const bodyJSON = { title, content };
+ //    this.adapter.updateNote(note.id, bodyJSON)
+ //    .then(updatedNote => {
+ //      const note = Note.findById(updatedNote.id);
+ //      note.update(updatedNote);
+ //      this.addNotes();
+ //    });
+ //  }
 //Works for site #1, but not for the others. Figure out why, and fix
