@@ -5,7 +5,6 @@ const endPoint = "http://localhost:3000/api/v1"
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
-
 	fetchTopics()
 	writeButtonHandler()
 })
