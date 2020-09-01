@@ -21,8 +21,7 @@ class Site {
 	}
 	renderSiteList() {
 		return  `
-		  	<div>
-
+		  	<div id="site-card">
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
 				<br>

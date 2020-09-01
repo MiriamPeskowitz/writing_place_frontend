@@ -44,47 +44,6 @@ function seeSitesButtonHandler() {
 	} )
 }
 
-//try again with this, because I need it to render by topic 
-
-// function writeButtonHandler() {
-// 	document.addEventListener('click', (e) => {
-// 		if (e.target.className == "write-button") {
-// 			// console.log(e.target.dataset.id)
-// 			//found the exact id of that whole class that I want: 
-// 			let id = e.target.dataset.id
-// 			// console.log("id: ", id)
-// 			fetchSites(id)
-// 		}
-// 	} )
-// }
-
-// // // 3
-// function fetchSites(id) {
-// 	console.log(topicsEndPoint +`/${id}`)
-// 	fetch(topicsEndPoint +`/${id}`)  
-//  	 .then(response => response.json())
-//  	 .then(json => {
-//  	 	// console.log("json: ", json)
-//  	 	// let allSites = data.attributes 	
-//  	 	//notes are data.attributes.notes -- array, id/title/body/site_id 
-//  	 	//sites are s
-//  	 	// console.log("allSites: ", allSites)
-//  	 	json.forEach(site => {
-// 	 		let newSite = new Site(site)
-//  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
-//  			//hide the topics: 
-//  			document.querySelector("#topics").style.display = "none"; 
-// 			//find the css that collapses the space, too, display = none, visibility = visible
-// 			//next: make write button work so note space appears 
-// 			const button = document.querySelector(".save-note")
-// 			let siteId = site.id
-// 			button.addEventListener('click', (e) => getNoteData(e, siteId))
-//  	 	}) 	
-//  	 }).catch(error => console.log(error))
-// }
-
-
-
 // 3 This is through sites -- and change render site card to renderSiteList
 function fetchSites(id) {
 	console.log('sites fetched')
@@ -106,39 +65,35 @@ function fetchSites(id) {
  			//hide the topics: 
  			document.querySelector("#topics").style.display = "none";  
 			//find the css that collapses the space, too, display = none, visibility = visible
+			
+			let siteId = newSite.id
+			
+			let topicId = newSite.topicId
+
+			handleExploreAndWriteButton(siteId, topicId)
+			// const exploreAndWriteButton = document.getElementById("site-card")
+			// exploreAndWriteButton.addEventListener('click', () => handleExploreAndWriteButton(siteId, topicId))
 
 			}
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
 
+function handleExploreAndWriteButton() {
+	console.log("here")
+	const exploreAndWriteButton = document.getElementById("site-card")
+	exploreAndWriteButton.addEventListener('click', () =>  {
 
-// function seeSitesButtonHandler() {
-// 	console.log('writeButtonHandler')
-// 	document.addEventListener('click', (e) => {
-// 		if (e.target.className == "see-sites-button") {
-// 			// console.log(e.target.dataset.id)
-// 			//found the exact id of that whole class that I want: 
-// 			let id = e.target.dataset.id
-// 			// console.log("id: ", id)
-// 			fetchSites(id)
-// 		}
-// 	} )
-// }
+		console.log(e)
+		if (e.target.className = "explore-and-write-button") {
+			console.log(e.target.dataset.id)
+			let id = e.target.dataset.id
+			console.log("id: ", id)
+		}
+ 	})
+ }
 
-
-function handleExploreAndWriteButton(e, topicId) {
-	console.log('exploreandWriteButtonHandler')
-	// const button = document.getElementByClassName("explore-and-write-button")
-	// button.addEventListener('click', (e) => {
-	// 	if (e.target.className = "explore-and-write-button") {
-	// 		console.log(e.target.dataset.id)
-	// 		let id = e.target.dataset.id
-	// 		console.log("id: ", id)
-	// 	}
-	// })
 	// console.log("siteId, topciId:" , id, topicId)	
-}
 
 
 			// const seeSitesButton = document.getElementById("open-form")
@@ -146,7 +101,7 @@ function handleExploreAndWriteButton(e, topicId) {
 			
 			// let topicId = newSite.topicId
 			// // console.log(siteId)
-			
+			// const seeSitesButton = document.getElementById("open-form")
 			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
 function getNoteData(e, siteId) {
