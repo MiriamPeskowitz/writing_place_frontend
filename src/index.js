@@ -81,7 +81,10 @@ function fetchSites(id) {
 function handleExploreAndWriteButton(siteId, topicId) {
 	console.log("here")
 	console.log("siteId, topicId: ", siteId, topicId)
-	//for this siteId, render the form care 
+	//for this siteId, render the note form
+	//for this function to work, I have to instantiate the object, with a fetch?  
+	//that sounds right: fetchNote. It's like fetchNote for this single site and render the data in the Note form 
+	//like the fetch above... use that syntax 
 	renderNoteForm(siteId) 
 
 
@@ -108,6 +111,7 @@ function handleExploreAndWriteButton(siteId, topicId) {
 			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
 
+//this function grabs the values in the note -- ie, what the user wrote -- and passes it to postNote to be saved 
 function getNoteData(siteId) {
 	console.log("siteId: ",  siteId)
 	// e.preventDefault()
