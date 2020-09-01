@@ -9,7 +9,7 @@ class Topic {
 		return `
 			<div data-id=${this.id}>
 			   <h3>${this.name}</h3>
-			   <button class="write-button" data-id=${this.id}>See Sites</button>
+			   <button class="see-sites-button" data-id=${this.id}>See Sites</button>
 			</div>	`
 	}
 }

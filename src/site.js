@@ -21,11 +21,11 @@ class Site {
 	}
 	renderSiteList() {
 		return  `
-		  	<div>
-
+		  	<div id="site-card">
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
-				<p><button id="open-form" data-id=${this.id}>Explore and Reflect</button></p>
+				<br>
+				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
 	}

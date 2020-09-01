@@ -5,9 +5,8 @@ const endPoint = "http://localhost:3000/api/v1"
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
-
 	fetchTopics()
-	writeButtonHandler()
+	seeSitesButtonHandler()
 })
 
 
@@ -31,11 +30,11 @@ function fetchTopics() {
 }
 
 
-//2 add button handler to get the id from e.target.dataset 
-function writeButtonHandler() {
+//2 add button handler to get the id from e.target.dataset and call up the sites within a topic 
+function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
-		if (e.target.className == "write-button") {
+		if (e.target.className == "see-sites-button") {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
@@ -45,51 +44,9 @@ function writeButtonHandler() {
 	} )
 }
 
-//try again with this, because I need it to render by topic 
-
-// function writeButtonHandler() {
-// 	document.addEventListener('click', (e) => {
-// 		if (e.target.className == "write-button") {
-// 			// console.log(e.target.dataset.id)
-// 			//found the exact id of that whole class that I want: 
-// 			let id = e.target.dataset.id
-// 			// console.log("id: ", id)
-// 			fetchSites(id)
-// 		}
-// 	} )
-// }
-
-// // // 3
-// function fetchSites(id) {
-// 	console.log(topicsEndPoint +`/${id}`)
-// 	fetch(topicsEndPoint +`/${id}`)  
-//  	 .then(response => response.json())
-//  	 .then(json => {
-//  	 	// console.log("json: ", json)
-//  	 	// let allSites = data.attributes 	
-//  	 	//notes are data.attributes.notes -- array, id/title/body/site_id 
-//  	 	//sites are s
-//  	 	// console.log("allSites: ", allSites)
-//  	 	json.forEach(site => {
-// 	 		let newSite = new Site(site)
-//  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
-//  			//hide the topics: 
-//  			document.querySelector("#topics").style.display = "none"; 
-// 			//find the css that collapses the space, too, display = none, visibility = visible
-// 			//next: make write button work so note space appears 
-// 			const button = document.querySelector(".save-note")
-// 			let siteId = site.id
-// 			button.addEventListener('click', (e) => getNoteData(e, siteId))
-//  	 	}) 	
-//  	 }).catch(error => console.log(error))
-// }
-
-
-
-
 // 3 This is through sites -- and change render site card to renderSiteList
 function fetchSites(id) {
-	console.log('fetched')
+	console.log('sites fetched')
 
 	fetch(sitesEndPoint)  
  	 .then(response => response.json())
@@ -108,23 +65,45 @@ function fetchSites(id) {
  			//hide the topics: 
  			document.querySelector("#topics").style.display = "none";  
 			//find the css that collapses the space, too, display = none, visibility = visible
-
-			const seeSitesButton = document.getElementById("open-form")
-			// let siteId = site.id
+			
+			let siteId = newSite.id
 			
 			let topicId = newSite.topicId
-			// console.log(siteId)
-			
-			seeSitesButton.addEventListener('click', (e) => handleFormOpener(e,  topicId))
+			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
+			//why does document work here as the parent, and hEAWB still knows which button 
+			//to attach to? 
 			}
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
 
-function handleFormOpener(e, topicId) {
-	const id = e.target.dataset.id
-	console.log("siteId, topciId:" , id, topicId)	
-}
+function handleExploreAndWriteButton(siteId, topicId) {
+	console.log("here")
+	console.log("siteId, topicId: ", siteId, topicId)
+	// const exploreAndWriteButton = document.getElementById("site-card")
+	// exploreAndWriteButton.addEventListener('click', (e) =>  {
+		// document.addEventListener('click', (e) => {
+		// 	console.log(e)
+		// })
+		// console.log(e)
+		// if (e.target.className = "explore-and-write-button") {
+		// 	// console.log(e.target.dataset.id)
+		// 	let id = e.target.dataset.id
+		// 	console.log("id: ", id)
+		// }
+ 	// })
+ }
+
+	// console.log("siteId, topciId:" , id, topicId)	
+
+
+			// const seeSitesButton = document.getElementById("open-form")
+			// // let siteId = site.id
+			
+			// let topicId = newSite.topicId
+			// // console.log(siteId)
+			// const seeSitesButton = document.getElementById("open-form")
+			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
 function getNoteData(e, siteId) {
 	console.log(e, siteId)
