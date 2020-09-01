@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-// 1 -- fine, makes the topic list 
+// 1 -- fetches topic list  and puts onto DOM 
 function fetchTopics() {
 	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
@@ -44,7 +44,7 @@ function seeSitesButtonHandler() {
 	} )
 }
 
-// 3 This is through sites -- and change render site card to renderSiteList
+// 3 fetch the list of 8 sites, through sites -- and change render site card to renderSiteList
 function fetchSites(id) {
 	console.log('sites fetched')
 
@@ -59,7 +59,6 @@ function fetchSites(id) {
  	 		if (site.relationships.topic.data.id === id) {
 	 		let newSite = new Site(site)
 
-	 		// console.log("newSite: ", newSite)
  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
  
  			//hide the topics: 
@@ -67,8 +66,8 @@ function fetchSites(id) {
 			//find the css that collapses the space, too, display = none, visibility = visible
 			
 			let siteId = newSite.id
-			
 			let topicId = newSite.topicId
+
 			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
 			//why does document work here as the parent, and hEAWB still knows which button 
 			//to attach to? 
@@ -77,9 +76,12 @@ function fetchSites(id) {
  	 }).catch(error => console.log(error))
 }
 
+//4 what happens after the button for each site is clicked: form opens up for user to record notes on
+//namely: call renderFormCard() and hide the rest 
 function handleExploreAndWriteButton(siteId, topicId) {
 	console.log("here")
 	console.log("siteId, topicId: ", siteId, topicId)
+	renderNoteFormCard(siteId)
 	// const exploreAndWriteButton = document.getElementById("site-card")
 	// exploreAndWriteButton.addEventListener('click', (e) =>  {
 		// document.addEventListener('click', (e) => {
@@ -105,9 +107,9 @@ function handleExploreAndWriteButton(siteId, topicId) {
 			// const seeSitesButton = document.getElementById("open-form")
 			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
-function getNoteData(e, siteId) {
-	console.log(e, siteId)
-	e.preventDefault()
+function getNoteData(siteId) {
+	console.log("siteId: ",  siteId)
+	// e.preventDefault()
 	
 	const noteBodyInput = document.querySelector("#noteBody").value
 	// console.log("noteBody :", noteBodyInput)

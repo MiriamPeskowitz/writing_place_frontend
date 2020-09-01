@@ -30,7 +30,7 @@ class Site {
 			</div>`
 	}
 
-	renderFormCard() {
+	renderNoteFormCard() {
 		return  `
 			<div ${data.id}>
 				<h3>${this.name}</h3>
