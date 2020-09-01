@@ -6,7 +6,7 @@ const endPoint = "http://localhost:3000/api/v1"
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
 	fetchTopics()
-	writeButtonHandler()
+	seeSitesButtonHandler()
 })
 
 
@@ -31,10 +31,10 @@ function fetchTopics() {
 
 
 //2 add button handler to get the id from e.target.dataset 
-function writeButtonHandler() {
+function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
-		if (e.target.className == "write-button") {
+		if (e.target.className == "see-sites-button") {
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
 			let id = e.target.dataset.id
