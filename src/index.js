@@ -69,28 +69,29 @@ function fetchSites(id) {
 			let siteId = newSite.id
 			
 			let topicId = newSite.topicId
-
-			handleExploreAndWriteButton(siteId, topicId)
-			// const exploreAndWriteButton = document.getElementById("site-card")
-			// exploreAndWriteButton.addEventListener('click', () => handleExploreAndWriteButton(siteId, topicId))
-
+			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
+			//why does document work here as the parent, and hEAWB still knows which button 
+			//to attach to? 
 			}
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
 
-function handleExploreAndWriteButton() {
+function handleExploreAndWriteButton(siteId, topicId) {
 	console.log("here")
-	const exploreAndWriteButton = document.getElementById("site-card")
-	exploreAndWriteButton.addEventListener('click', () =>  {
-
-		console.log(e)
-		if (e.target.className = "explore-and-write-button") {
-			console.log(e.target.dataset.id)
-			let id = e.target.dataset.id
-			console.log("id: ", id)
-		}
- 	})
+	console.log("siteId, topicId: ", siteId, topicId)
+	// const exploreAndWriteButton = document.getElementById("site-card")
+	// exploreAndWriteButton.addEventListener('click', (e) =>  {
+		// document.addEventListener('click', (e) => {
+		// 	console.log(e)
+		// })
+		// console.log(e)
+		// if (e.target.className = "explore-and-write-button") {
+		// 	// console.log(e.target.dataset.id)
+		// 	let id = e.target.dataset.id
+		// 	console.log("id: ", id)
+		// }
+ 	// })
  }
 
 	// console.log("siteId, topciId:" , id, topicId)	
