@@ -30,7 +30,7 @@ function fetchTopics() {
 }
 
 
-//2 add button handler to get the id from e.target.dataset 
+//2 add button handler to get the id from e.target.dataset and call up the sites within a topic 
 function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
@@ -85,10 +85,9 @@ function seeSitesButtonHandler() {
 
 
 
-
 // 3 This is through sites -- and change render site card to renderSiteList
 function fetchSites(id) {
-	console.log('fetched')
+	console.log('sites fetched')
 
 	fetch(sitesEndPoint)  
  	 .then(response => response.json())
@@ -108,22 +107,47 @@ function fetchSites(id) {
  			document.querySelector("#topics").style.display = "none";  
 			//find the css that collapses the space, too, display = none, visibility = visible
 
-			const seeSitesButton = document.getElementById("open-form")
-			// let siteId = site.id
-			
-			let topicId = newSite.topicId
-			// console.log(siteId)
-			
-			seeSitesButton.addEventListener('click', (e) => handleFormOpener(e,  topicId))
 			}
  	 	}) 	
  	 }).catch(error => console.log(error))
 }
 
-function handleFormOpener(e, topicId) {
-	const id = e.target.dataset.id
-	console.log("siteId, topciId:" , id, topicId)	
+
+// function seeSitesButtonHandler() {
+// 	console.log('writeButtonHandler')
+// 	document.addEventListener('click', (e) => {
+// 		if (e.target.className == "see-sites-button") {
+// 			// console.log(e.target.dataset.id)
+// 			//found the exact id of that whole class that I want: 
+// 			let id = e.target.dataset.id
+// 			// console.log("id: ", id)
+// 			fetchSites(id)
+// 		}
+// 	} )
+// }
+
+
+function handleExploreAndWriteButton(e, topicId) {
+	console.log('exploreandWriteButtonHandler')
+	// const button = document.getElementByClassName("explore-and-write-button")
+	// button.addEventListener('click', (e) => {
+	// 	if (e.target.className = "explore-and-write-button") {
+	// 		console.log(e.target.dataset.id)
+	// 		let id = e.target.dataset.id
+	// 		console.log("id: ", id)
+	// 	}
+	// })
+	// console.log("siteId, topciId:" , id, topicId)	
 }
+
+
+			// const seeSitesButton = document.getElementById("open-form")
+			// // let siteId = site.id
+			
+			// let topicId = newSite.topicId
+			// // console.log(siteId)
+			
+			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
 function getNoteData(e, siteId) {
 	console.log(e, siteId)
