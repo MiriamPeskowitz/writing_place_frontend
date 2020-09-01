@@ -81,13 +81,13 @@ function fetchSites(id) {
 function handleExploreAndWriteButton(siteId, topicId) {
 	console.log("here")
 	console.log("siteId, topicId: ", siteId, topicId)
-	renderNoteFormCard(siteId)
-	// const exploreAndWriteButton = document.getElementById("site-card")
-	// exploreAndWriteButton.addEventListener('click', (e) =>  {
-		// document.addEventListener('click', (e) => {
-		// 	console.log(e)
-		// })
-		// console.log(e)
+	//for this siteId, render the form care 
+	renderNoteForm(siteId) 
+
+
+	//any render pulls the data with it, so the form includes the element and any data
+	//there can by multiple notes for each one. 
+	
 		// if (e.target.className = "explore-and-write-button") {
 		// 	// console.log(e.target.dataset.id)
 		// 	let id = e.target.dataset.id
@@ -106,6 +106,7 @@ function handleExploreAndWriteButton(siteId, topicId) {
 			// // console.log(siteId)
 			// const seeSitesButton = document.getElementById("open-form")
 			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
+
 
 function getNoteData(siteId) {
 	console.log("siteId: ",  siteId)
@@ -126,7 +127,7 @@ function getNoteData(siteId) {
 }
 
 
-//4 user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
+//user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
 function postNote(e, body, site_id) {
 	e.preventDefault()
 	console.log('body, site_id: ', body, site_id)

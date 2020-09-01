@@ -30,9 +30,9 @@ class Site {
 			</div>`
 	}
 
-	renderNoteFormCard() {
+	renderNoteForm(id) {
 		return  `
-			<div ${data.id}>
+			<div ${this.id}>
 				<h3>${this.name}</h3>
 				<img src=${this.image}>
 				<p>${this.description}</p>
