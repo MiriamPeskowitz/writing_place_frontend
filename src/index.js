@@ -67,7 +67,7 @@ function fetchSites(topicId) {
 			let siteId = newSite.id
 			// let topicId = newSite.topicId
 			//do I need this second one, if already have topicId on top? 
-			console.log(topicId)
+		
 			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
 			//why does document work here as the parent, and hEAWB still knows which button 
 			//to attach to? 
@@ -79,13 +79,62 @@ function fetchSites(topicId) {
 //4 what happens after the button for each site is clicked: form opens up for user to record notes on
 //namely: call renderFormCard() and hide the rest 
 function handleExploreAndWriteButton(siteId, topicId) {
-	console.log("here")
-	console.log("siteId, topicId: ", siteId, topicId)
+	console.log('here')
+	console.log(siteId, topicId)
+	document.querySelector('#writing-form').innerHTML = renderNoteForm(siteId)
+	document.querySelector("#sites").style.display = "none";  
+	// renderNoteForm(siteId)
+}
+	// if (e.target.className == "see-sites-button") {
+	// 		let topicId = e.target.dataset.id
+	// 		console.log(topicId)
+	// 		fetchSites(topicId)
+	// 	}
+// function seeSitesButtonHandler() {
+// 	console.log('writeButtonHandler')
+// 	document.addEventListener('click', (e) => {
+// 		if (e.target.className == "see-sites-button") {
+// 			let topicId = e.target.dataset.id
+// 			console.log(topicId)
+// 			fetchSites(topicId)
+// 		}
+// 	} )
+
+function renderNoteForm(siteId) {
+		return  `
+			<div ${this.id}>
+				<h3>${this.name}</h3>
+				<img src=${this.image}>
+				<p>${this.description}</p>
+				<form id="note-form" data-id=${this.id}>
+		  	       <label>Reflecting near ${this.name}</label
+		  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
+					<br>
+					<button class="save-note" type='submit'>Save Note</button>
+				</form>
+			</div>	`
+}
+
+
+
+	// console.log("here")
+	// console.log("siteId, topicId: ", siteId, topicId)
 	//for this siteId, render the note form
 	//for this function to work, I have to instantiate the object, with a fetch?  
 	//that sounds right: fetchNote. It's like fetchNote for this single site and render the data in the Note form 
 	//like the fetch above... use that syntax 
-	renderNoteForm() 
+	// renderNoteForm() 
+			// `<div ${this.id}>
+			// 	<h3>${this.name}</h3>
+			// 	<img src=${this.image}>
+			// 	<p>${this.description}</p>
+			// 	<form id="note-form" data-id=${this.id}>
+		 //  	       <label>Reflecting near ${this.name}</label
+		 //  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
+			// 		<br>
+			// 		<button class="save-note" type='submit'>Save Note</button>
+			// 	</form>
+			// </div>	`
 
 
 	//any render pulls the data with it, so the form includes the element and any data
@@ -97,7 +146,7 @@ function handleExploreAndWriteButton(siteId, topicId) {
 		// 	console.log("id: ", id)
 		// }
  	// })
- }
+ 
 
 	// console.log("siteId, topciId:" , id, topicId)	
 

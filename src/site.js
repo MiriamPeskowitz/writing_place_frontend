@@ -32,20 +32,20 @@ class Site {
 			</div>`
 	}
 
-	renderNoteForm() {
-		return  `
-			<div ${this.id}>
-				<h3>${this.name}</h3>
-				<img src=${this.image}>
-				<p>${this.description}</p>
-				<form id="note-form" data-id=${this.id}>
-		  	       <label>Reflecting near ${this.name}</label
-		  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
-					<br>
-					<button class="save-note" type='submit'>Save</button>
-				</form>
-			</div>	`
-	}
+	// renderNoteForm() {
+	// 	return  `
+	// 		<div ${this.id}>
+	// 			<h3>${this.name}</h3>
+	// 			<img src=${this.image}>
+	// 			<p>${this.description}</p>
+	// 			<form id="note-form" data-id=${this.id}>
+	// 	  	       <label>Reflecting near ${this.name}</label
+	// 	  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
+	// 				<br>
+	// 				<button class="save-note" type='submit'>Save Note</button>
+	// 			</form>
+	// 		</div>	`
+	// }
 		 //  <section>	
 			// <h3>${this.id}. ${this.name}</h3>
 			// <img src=${this.image}>
@@ -67,7 +67,7 @@ class Site {
 	
 
 	static findById(id) {
-		return this.all.find(note => note.id === id)
+		return this.all.find(site => site.id === id)
 	}
 }
 	// this.topicId = site.relationships.topic.data.id
