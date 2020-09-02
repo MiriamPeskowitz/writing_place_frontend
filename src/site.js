@@ -6,7 +6,7 @@ class Site {
 		this.image = data.attributes.image_url
 		this.description = data.attributes.description
 		this.topicId = parseInt(data.relationships.topic.data.id)
-		this.noteBody = data.attributes.notes
+		// this.noteBody = data.attributes.notes
 		// add these so that 
 		// add note.body = site
 		// //add this.noteId = site.
@@ -15,6 +15,8 @@ class Site {
 		// this.body = noteAttributes.body
 		// this.title = noteAttributes.title
 		// this.siteId = noteAttributes.site.id
+
+
 
 
 		Site.all.push(this)
@@ -30,14 +32,14 @@ class Site {
 			</div>`
 	}
 
-	renderNoteForm(id) {
+	renderNoteForm() {
 		return  `
 			<div ${this.id}>
 				<h3>${this.name}</h3>
 				<img src=${this.image}>
 				<p>${this.description}</p>
 				<form id="note-form" data-id=${this.id}>
-		  	       <label>Writing near ${this.name}</label
+		  	       <label>Reflecting near ${this.name}</label
 		  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
 					<br>
 					<button class="save-note" type='submit'>Save</button>

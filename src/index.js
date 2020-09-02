@@ -35,17 +35,16 @@ function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "see-sites-button") {
-			// console.log(e.target.dataset.id)
-			//found the exact id of that whole class that I want: 
-			let id = e.target.dataset.id
-			// console.log("id: ", id)
-			fetchSites(id)
+			let topicId = e.target.dataset.id
+			console.log(topicId)
+			fetchSites(topicId)
 		}
 	} )
 }
 
 // 3 fetch the list of 8 sites, through sites -- and change render site card to renderSiteList
-function fetchSites(id) {
+//passing topicId is how the code makes sure to get only the sites for the chosen topic, see first line in allSites.forEach 
+function fetchSites(topicId) {
 	console.log('sites fetched')
 
 	fetch(sitesEndPoint)  
@@ -56,18 +55,19 @@ function fetchSites(id) {
  	 	// console.log("allSites: ", allSites)
 
  	 	allSites.forEach(site => {
- 	 		if (site.relationships.topic.data.id === id) {
+ 	 		if (site.relationships.topic.data.id === topicId) {
 	 		let newSite = new Site(site)
 
  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
  
  			//hide the topics: 
  			document.querySelector("#topics").style.display = "none";  
-			//find the css that collapses the space, too, display = none, visibility = visible
+			//feature: find the css that collapses the space, too, display = none, visibility = visible
 			
 			let siteId = newSite.id
-			let topicId = newSite.topicId
-
+			// let topicId = newSite.topicId
+			//do I need this second one, if already have topicId on top? 
+			console.log(topicId)
 			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
 			//why does document work here as the parent, and hEAWB still knows which button 
 			//to attach to? 
@@ -85,7 +85,7 @@ function handleExploreAndWriteButton(siteId, topicId) {
 	//for this function to work, I have to instantiate the object, with a fetch?  
 	//that sounds right: fetchNote. It's like fetchNote for this single site and render the data in the Note form 
 	//like the fetch above... use that syntax 
-	renderNoteForm(siteId) 
+	renderNoteForm() 
 
 
 	//any render pulls the data with it, so the form includes the element and any data
