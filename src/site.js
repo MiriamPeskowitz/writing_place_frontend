@@ -42,35 +42,16 @@ class Site {
 		  	       <br>
 		  	       <textarea id=${this.noteBody} name="note" rows="20" cols="50" ></textarea>
 					<br>
-					<button class="save-note" type='submit'>Save Note</button>
+					<div id="buttons">
+						<button class="save-note" type='submit'>Save Note</button>
+						 <br>
+						 <br>	
+						<button id="return-to-sites">Coming Soon: Back to Site List</button>
+						<button id="return-to-topics">Coming Soon: Back to Topics</button>	
+					</div>
 				</form>
 			</div>	`
 	}
-
-		// <div ${this.id}>
-		// 		<h3>${this.name}</h3>
-		// 		<img src=${this.image}>
-		// 		<p>${this.description}</p>
-		// 		</div>
-		 //  <section>	
-			// <h3>${this.id}. ${this.name}</h3>
-			// <img src=${this.image}>
-			// <p>${this.description}</p>
-			// <h4>My Writing, near ${this.name}</h4>
-			// <br><br>
-			// <div id="completed-text"></div>
-			// <form id="note-form" data-id=${this.id}>
-	  // 	       <label>Writing near ${this.name}</label
-	  // 	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
-			// 	<br>
-			// 	<button class="save-note" type='submit'>Save</button>
-			// </form>	
-			// <div id="buttons">
-			// 	<button id="return-to-topics">Coming Soon: Back to Topics</button>	
-			// </div>
-		 //  </section>
-
-	
 
 	static findById(id) {
 		return this.all.find(site => site.id === id)
