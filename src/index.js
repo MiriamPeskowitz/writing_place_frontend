@@ -77,10 +77,8 @@ function fetchSites(topicId) {
 
  
 
-//4 User clicks Explore and Write button. 
+//4 User clicks Explore and Write button and a form renders to write a note 
 // 
-//namely: call renderFormCard() and hide the rest 
-//which means, fetch that site's data including the note. and create new Note 
 function handleExploreAndWriteButton(siteId) {
 	document.querySelector("#sites").addEventListener('click', (e) => {
 		console.log("EWButton clicked")
@@ -92,6 +90,11 @@ function handleExploreAndWriteButton(siteId) {
 		const site = Site.findById(id)
 		console.log("site:", site)
 		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
+		addShowSiteListButton()
+		hideExploreAndWriteButton()
+		// hide class="explore-and-write-button"
+		// hide everything that isn't this note
+		// add back-button 
 	})
 }
 
@@ -126,20 +129,20 @@ function fetchNotes(siteId){
 // 		}
 // 	} )
 
-function renderNoteForm(siteId) {
-		return  `
-			<div ${siteId}>
-				<h3>${this.name} ${siteId}</h3>
-				<img src=${this.image}>
-				<p>${this.description}</p>
-				<form id="note-form" data-id=${this.id}>
-		  	       <label>Reflecting near ${this.name}</label
-		  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
-					<br>
-					<button class="save-note" type='submit'>Save Note</button>
-				</form>
-			</div>	`
-}
+// function renderNoteForm(siteId) {
+// 		return  `
+// 			<div ${siteId}>
+// 				<h3>${this.name} ${siteId}</h3>
+// 				<img src=${this.image}>
+// 				<p>${this.description}</p>
+// 				<form id="note-form" data-id=${this.id}>
+// 		  	       <label>Reflecting near ${this.name}</label
+// 		  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
+// 					<br>
+// 					<button class="save-note" type='submit'>Save Note</button>
+// 				</form>
+// 			</div>	`
+// }
 
 
 
@@ -253,6 +256,17 @@ function addEditButton() {
 	// editButton.addAttribute -- data-id
 	let buttonSection = document.getElementById("buttons")
 	buttonSection.appendChild(editButton)
+}
+
+function hideExploreAndWriteButton() {
+	document.querySelector('.explore-and-write-button').style.display = "none";
+}
+
+function addShowSiteListButton() {
+	let showSiteListButton = document.createElement('button')
+	showSiteListButton.innerHTML = "Back to Site List"
+	console.log("Back to Sites --showSiteListButton")
+	// something.appendChild(showSiteListButton)
 }
 
 function backToTopicsButton() {
