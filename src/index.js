@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-// 1 -- fetches topic list  and puts onto DOM 
+// DONE 1 -- fetches topic list  and puts onto DOM 
 function fetchTopics() {
 	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
@@ -30,19 +30,19 @@ function fetchTopics() {
 }
 
 
-//2 add button handler to get the id from e.target.dataset and call up the sites within a topic 
+//2 DONE add button handler to get the id from e.target.dataset and call up the sites within a topic 
 function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
 		if (e.target.className == "see-sites-button") {
 			let topicId = e.target.dataset.id
-			console.log(topicId)
+			console.log("topicId: ", topicId)
 			fetchSites(topicId)
 		}
-	} )
+	})
 }
 
-// 3 fetch the list of 8 sites, through sites -- and change render site card to renderSiteList
+// 3 DONE fetch the list of 8 sites, through sites -- and change render site card to renderSiteList
 //passing topicId is how the code makes sure to get only the sites for the chosen topic, see first line in allSites.forEach 
 function fetchSites(topicId) {
 	console.log('sites fetched')
@@ -65,10 +65,10 @@ function fetchSites(topicId) {
 			//feature: find the css that collapses the space, too, display = none, visibility = visible
 			
 			let siteId = newSite.id
-			// let topicId = newSite.topicId
+			let topicId = newSite.topicId
+			// console.log("siteId", siteId)
 			//do I need this second one, if already have topicId on top? 
-		
-			document.addEventListener('click', handleExploreAndWriteButton(siteId, topicId))
+			handleExploreAndWriteButton(siteId, topicId)
 			//why does document work here as the parent, and hEAWB still knows which button 
 			//to attach to? 
 			}
@@ -76,13 +76,42 @@ function fetchSites(topicId) {
  	 }).catch(error => console.log(error))
 }
 
-//4 what happens after the button for each site is clicked: form opens up for user to record notes on
+
+ 
+
+//4 User clicks Explore and Write button. 
+// 
 //namely: call renderFormCard() and hide the rest 
-function handleExploreAndWriteButton(siteId, topicId) {
-	console.log('here')
-	console.log(siteId, topicId)
+//which means, fetch that site's data including the note. and create new Note 
+function handleExploreAndWriteButton() {
+	document.querySelector("#sites").addEventListener('click', (e) => {
+		console.log("EWButton clicked")
+		const id = parseInt(e.target.dataset.id)
+		console.log("id: ", id)
+
+		const note = Note.findById(id)
+		console.log("note, which is Note find by id: ", note)
+		console.log("note.id ", note.id)
+	})
+
+	
+
+	// fetchNotes(id)
+
+	}
+//if note === note.id 
+	// console.log("this: ", this)
+	
+	// fetchNotes()
+	// siteNotes = findById(siteId)
+	// console.log("siteNotes: ", siteNotes )
+	
+
+function fetchNotes(siteId){
+	// console.log('fetchNotes')
+	console.log('fetchnotes')
 	document.querySelector('#writing-form').innerHTML = renderNoteForm(siteId)
-	document.querySelector("#sites").style.display = "none";  
+	// document.querySelector("#sites").style.display = "none";  
 	// renderNoteForm(siteId)
 }
 	// if (e.target.className == "see-sites-button") {
@@ -102,8 +131,8 @@ function handleExploreAndWriteButton(siteId, topicId) {
 
 function renderNoteForm(siteId) {
 		return  `
-			<div ${this.id}>
-				<h3>${this.name}</h3>
+			<div ${siteId}>
+				<h3>${this.name} ${siteId}</h3>
 				<img src=${this.image}>
 				<p>${this.description}</p>
 				<form id="note-form" data-id=${this.id}>

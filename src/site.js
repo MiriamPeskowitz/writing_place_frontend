@@ -26,26 +26,27 @@ class Site {
 		  	<div id="site-card">
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
+				<p>${this.description}</p>
 				<br>
 				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
 	}
 
-	// renderNoteForm() {
-	// 	return  `
-	// 		<div ${this.id}>
-	// 			<h3>${this.name}</h3>
-	// 			<img src=${this.image}>
-	// 			<p>${this.description}</p>
-	// 			<form id="note-form" data-id=${this.id}>
-	// 	  	       <label>Reflecting near ${this.name}</label
-	// 	  	       <textarea id="noteBody" name="note" rows="20" cols="50"${this.noteBody}></textarea>
-	// 				<br>
-	// 				<button class="save-note" type='submit'>Save Note</button>
-	// 			</form>
-	// 		</div>	`
-	// }
+	renderNoteForm() {
+		return  `
+			<div ${this.id}>
+				<h3>${this.name}</h3>
+				<img src=${this.image}>
+				<p>${this.description}</p>
+				<form id="note-form" data-id=${this.id}>
+		  	       <label>Reflecting near ${this.name}</label
+		  	       <textarea id="noteBody" name="note" rows="20" cols="50" ${this.noteBody}></textarea>
+					<br>
+					<button class="save-note" type='submit'>Save Note</button>
+				</form>
+			</div>	`
+	}
 		 //  <section>	
 			// <h3>${this.id}. ${this.name}</h3>
 			// <img src=${this.image}>
