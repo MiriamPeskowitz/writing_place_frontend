@@ -28,6 +28,7 @@ class Site {
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
+				<div id="writing-form"></div>
 				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
@@ -35,10 +36,8 @@ class Site {
 
 	renderNoteForm() {
 		return  `
-			<div ${this.id}>
-				<h3>${this.name}</h3>
-				<img src=${this.image}>
-				<p>${this.description}</p>
+
+			<div>
 				<form id="note-form" data-id=${this.id}>
 		  	       <label>Reflecting near ${this.name}</label
 		  	       <textarea id="noteBody" name="note" rows="20" cols="50" ${this.noteBody}></textarea>
@@ -47,6 +46,12 @@ class Site {
 				</form>
 			</div>	`
 	}
+
+		// <div ${this.id}>
+		// 		<h3>${this.name}</h3>
+		// 		<img src=${this.image}>
+		// 		<p>${this.description}</p>
+		// 		</div>
 		 //  <section>	
 			// <h3>${this.id}. ${this.name}</h3>
 			// <img src=${this.image}>
@@ -71,10 +76,4 @@ class Site {
 		return this.all.find(site => site.id === id)
 	}
 }
-	// this.topicId = site.relationships.topic.data.id
-// 		this.id = site.id
-// 		this.name = site.attributes.name
-// 		this.image = site.attributes.image_url
-// 		this.description = site.attributes.description
-
 Site.all = []

@@ -7,6 +7,9 @@ class Note {
 
 		Note.all.push(this)
 	}
-	
+	static findById(id) {
+		return this.all.find(note => note.id === id)
+	}
+
 }
 Note.all = []

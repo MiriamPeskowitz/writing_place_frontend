@@ -69,8 +69,6 @@ function fetchSites(topicId) {
 			// console.log("siteId", siteId)
 			//do I need this second one, if already have topicId on top? 
 			handleExploreAndWriteButton(siteId, topicId)
-			//why does document work here as the parent, and hEAWB still knows which button 
-			//to attach to? 
 			}
  	 	}) 	
  	 }).catch(error => console.log(error))
@@ -83,22 +81,21 @@ function fetchSites(topicId) {
 // 
 //namely: call renderFormCard() and hide the rest 
 //which means, fetch that site's data including the note. and create new Note 
-function handleExploreAndWriteButton() {
+function handleExploreAndWriteButton(siteId) {
 	document.querySelector("#sites").addEventListener('click', (e) => {
 		console.log("EWButton clicked")
+
 		const id = parseInt(e.target.dataset.id)
 		console.log("id: ", id)
 
-		const note = Note.findById(id)
-		console.log("note, which is Note find by id: ", note)
-		console.log("note.id ", note.id)
+//open renderNoteForm in "writing-form"
+		const site = Site.findById(id)
+		console.log("site:", site)
+		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
 	})
+}
 
-	
 
-	// fetchNotes(id)
-
-	}
 //if note === note.id 
 	// console.log("this: ", this)
 	
