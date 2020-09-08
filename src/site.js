@@ -36,11 +36,11 @@ class Site {
 
 	renderNoteForm() {
 		return  `
-
 			<div>
 				<form id="note-form" data-id=${this.id}>
-		  	       <label>Reflecting near ${this.name}</label
-		  	       <textarea id="noteBody" name="note" rows="20" cols="50" ${this.noteBody}></textarea>
+		  	       <label>Reflecting near ${this.name}</label>
+		  	       <br>
+		  	       <textarea id=${this.noteBody} name="note" rows="20" cols="50" ></textarea>
 					<br>
 					<button class="save-note" type='submit'>Save Note</button>
 				</form>
