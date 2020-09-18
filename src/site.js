@@ -35,7 +35,7 @@ class Site {
 
 	renderNoteForm() {
 		return  `
-			<div id="site-card" data-id=${this.id}>
+			<div id="note-card" data-id=${this.id}>
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
@@ -43,10 +43,10 @@ class Site {
 				<form id="note-form">
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
-		  	       <textarea id=${this.noteBody} name="note" rows="20" cols="50" ></textarea>
+		  	       <textarea  name="note" rows="20" cols="50" ></textarea>
 					<br>
 					<div id="buttons">
-						<button class="save-note" type='submit'>Save Note</button>
+						<button class="save-note" data-id=${this.id} type='submit'>Save Note</button>
 						 <br>
 						 <br>	
 						<button id="return-to-sites">Coming Soon: Back to Site List</button>

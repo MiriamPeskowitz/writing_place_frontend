@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-// DONE 1 -- DOM loads and topic list is fetched and put on the DOM 
+// 1 -- DOM loads and topic list is fetched and put on the DOM 
 function fetchTopics() {
 	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
@@ -30,7 +30,7 @@ function fetchTopics() {
 }
 
 
-//2 DONE A button handler is added to each topic, so that a user can click the button and see that topic's list of sites. EventListener is attached to the document/parent, uses e.target matching to catch the correct button click. 
+//2 A button handler is added to each topic, so that a user can click the button and see that topic's list of sites. EventListener is attached to the document/parent, uses e.target matching to catch the correct button click. 
 function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
@@ -60,8 +60,6 @@ function fetchSites(topicId) {
 
  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
  
- 			//hide the topics list 
- 			// document.querySelector("#topics").style.display = "none";
  			hideTopicList()
 			
 			//prepare to send ids to the button 
@@ -77,34 +75,30 @@ function fetchSites(topicId) {
 
 //4 User clicks Explore and Write button and a form renders so user can write a note. The event listener is attached to the document/parent, and the siteId is generated using e.target.dataset.id, and uses the static function Site.findById(id) to render the form.
 function handleExploreAndWriteButton(siteId) {
-	document.addEventListener('click', (e) => {
-		e.preventDefault()
+	document.getElementById("sites").addEventListener('click', (e) => {
 		const siteId = parseInt(e.target.dataset.id)
-		// console.log("site id: ", siteId)
-
 		const site = Site.findById(siteId)
-		console.log("site:", site)
+		// console.log("site:", site)
 
-//Bug: it's going through 10 times... deal with this later 
+	//Bug: it's going through 10 times... deal with this later 
 		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
-
+		console.log("note opened", siteId)
 		hideExploreAndWriteButton()
 		hideSiteList()
 		//two other buttons are included in form render 			
 	})
 }
 
-
-//this function grabs the values in the note -- ie, what the user wrote -- and passes it to postNote to be saved 
-
 //was getNoteData(siteId)
+//this is what I'm trying to figure out. 
 //5 this function gives functionality to the Save note button. It collects the value in the note's content, and adds an event listener and calls postNote. 
 function handleSaveNoteButton(siteId) {
 	// console.log("siteId: ",  siteId)
-	// e.preventDefault()
 
-	document.addEventListener('click', (e) => {
-		// e.preventDefault()
+
+	document.getElementsByClassName("save-note").addEventListener('submit', (e) => {
+		e.preventDefault()
+		console.log("here")
 		if (e.target.className === "save-note") {
 			alert('yes')
 			// console.log(e.target.dataset.id)
@@ -141,7 +135,7 @@ function postNote(body, site_id) {
 		placeNote = document.getElementById("completed-text")
 		placeNote.innerHTML = newNote.body
 		// placeNote.setAttribute('data-id',newNote.id)
-		clear()
+		// clear()
 	})
 	.catch(error => console.log(error))
 }
@@ -196,7 +190,7 @@ function hideSiteList() {
 
 function backToTopicsButton() {
 	console.log("back to topics")
-	document.querySelector('topics').style.display = "block";
+	document.querySelector('#topics').style.display = "block";
 	//attach eventHandler to button 
 	//hid sites, show Topics 
 	// section id="notes" => style.display = "none"
@@ -213,6 +207,7 @@ function hideOtherSites() {
 }
 
 function showallSites() {
+	document.querySelector('#sites').style.display = "block";
 
 }
 //HANDLE FORM SUBMIT
