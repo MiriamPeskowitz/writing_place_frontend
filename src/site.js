@@ -35,14 +35,12 @@ class Site {
 
 	renderNoteForm() {
 		return  `
-			<div>
-				<div id="site-card">
-					<h3> ${this.name} </h3>
-					<img src=${this.image} width="100" height="100">
-					<p>${this.description}</p>
-					<br>
-				</div>
-				<form id="note-form" data-id=${this.id}>
+			<div id="site-card" data-id=${this.id}>
+				<h3> ${this.name} </h3>
+				<img src=${this.image} width="100" height="100">
+				<p>${this.description}</p>
+				<br>
+				<form id="note-form">
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
 		  	       <textarea id=${this.noteBody} name="note" rows="20" cols="50" ></textarea>

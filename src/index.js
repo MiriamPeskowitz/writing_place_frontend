@@ -50,20 +50,21 @@ function fetchSites(topicId) {
 	fetch(sitesEndPoint)  
  	 .then(response => response.json())
  	 .then(sites => {
- 	 	//if (site.topic_id === id)
- 	 	let allSites = sites.data
+ 	 		let allSites = sites.data
  	 	// console.log("allSites: ", allSites)
 
- 	 	allSites.forEach(site => {
+ 	 	//render the sites
+ 	 		allSites.forEach(site => {
  	 		if (site.relationships.topic.data.id === topicId) {
 	 		let newSite = new Site(site)
 
  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
  
- 			//hide the topics: 
- 			document.querySelector("#topics").style.display = "none";  
-			//feature: find the css that collapses the space, too, display = none, visibility = visible
+ 			//hide the topics list 
+ 			// document.querySelector("#topics").style.display = "none";
+ 			hideTopicList()
 			
+			//prepare to send ids to the button 
 			let siteId = newSite.id
 			let topicId = newSite.topicId
 			// console.log("siteId", siteId)
@@ -77,14 +78,13 @@ function fetchSites(topicId) {
 //4 User clicks Explore and Write button and a form renders so user can write a note. The event listener is attached to the document/parent, and the siteId is generated using e.target.dataset.id, and uses the static function Site.findById(id) to render the form.
 function handleExploreAndWriteButton(siteId) {
 	document.addEventListener('click', (e) => {
+		e.preventDefault()
 		const siteId = parseInt(e.target.dataset.id)
-		console.log("site id: ", siteId)
+		// console.log("site id: ", siteId)
 
 		const site = Site.findById(siteId)
 		console.log("site:", site)
 
-
-// Bug: attaches to the first one, problem with #writing-formDONE -- hide the list 
 //Bug: it's going through 10 times... deal with this later 
 		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
 
@@ -95,6 +95,147 @@ function handleExploreAndWriteButton(siteId) {
 }
 
 
+//this function grabs the values in the note -- ie, what the user wrote -- and passes it to postNote to be saved 
+
+//was getNoteData(siteId)
+//5 this function gives functionality to the Save note button. It collects the value in the note's content, and adds an event listener and calls postNote. 
+function handleSaveNoteButton(siteId) {
+	// console.log("siteId: ",  siteId)
+	// e.preventDefault()
+
+	document.addEventListener('click', (e) => {
+		// e.preventDefault()
+		if (e.target.className === "save-note") {
+			alert('yes')
+			// console.log(e.target.dataset.id)
+			//found the exact id of that whole class that I want: 
+			const id = e.target.dataset.id
+			const noteBodyInput = document.querySelector("#noteBody").value
+			console.log("id: ", id)
+			console.log("noteBody :", noteBodyInput)
+
+			alert('ready to post')
+			// postNote(noteBodyInput, id)	
+		}
+	})
+}
+
+
+//user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
+function postNote(body, site_id) {
+	// e.preventDefault()
+	console.log('body, site_id: ', body, site_id)
+	let bodyData = {body, site_id}
+	fetch(notesEndPoint, {
+		method: "POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify(bodyData)
+	})
+	.then(response => response.json())
+	.then(note => {
+		
+		// console.log("note: ", note)
+		const noteData = note.data
+		let newNote = new Note(noteData, noteData.attributes)
+		console.log("newNote: ", newNote)
+		placeNote = document.getElementById("completed-text")
+		placeNote.innerHTML = newNote.body
+		// placeNote.setAttribute('data-id',newNote.id)
+		clear()
+	})
+	.catch(error => console.log(error))
+}
+//add it so that your new writing will appear next time fetch is called on. 
+
+		// give form an id and close it up. If id
+function clear() {
+		emptyNoteBody()
+		hideNoteForm()
+		addEditButton()	
+}
+
+function emptyNoteBody() {
+	document.querySelector("#noteBody").value = ""
+}
+
+function hideNoteForm() {
+	document.querySelector('form').style.display = "none";
+}
+
+function addEditButton() {
+	let editButton = document.createElement("button")
+	editButton.innerHTML = (`Coming Soon: Edit/Add More </button>`)	
+	// editButton.addAttribute -- data-id
+	let buttonSection = document.getElementById("buttons")
+	buttonSection.appendChild(editButton)
+}
+
+function hideExploreAndWriteButton() {
+	document.querySelector('.explore-and-write-button').style.display = "none";
+}
+
+function hideTopicList() {
+	document.querySelector("#topics").style.display = "none"; 
+}
+
+function hideSiteList() {
+	document.querySelector('#sites').style.display = "none";
+}
+// function addShowSiteListButton() {
+// 	// return-to-sites"
+// 	const sites = document.querySelector("#sites")
+// 	sites.addEventListener('click', (e) => {
+// 		e.preventDefault()
+// 		sites.style.display = "block"
+	
+// 		document.querySelector('#topics').style.display = "none";
+// 	})
+// 	// console.log("Back to Sites --showSiteListButton")
+// 	// something.appendChild(showSiteListButton)
+// }
+
+function backToTopicsButton() {
+	console.log("back to topics")
+	document.querySelector('topics').style.display = "block";
+	//attach eventHandler to button 
+	//hid sites, show Topics 
+	// section id="notes" => style.display = "none"
+	document.querySelector("#sites").style.display = "none"; 
+	// Try display: unset or display: revert or display: normal or display: block 
+}
+
+
+function hideOtherSites() {
+	console.log("Coming Soon:hideOtherSites")
+	if (site.id !== this.id) {
+
+	}
+}
+
+function showallSites() {
+
+}
+//HANDLE FORM SUBMIT
+ // handleFormSubmit(e) {
+ //    e.preventDefault();
+ //    const id = e.target.dataset.id;
+ //    const note = Note.findById(id);
+ //    const title = $(e.target)
+ //      .find('input')
+ //      .val();
+ //    const content = $(e.target)
+ //      .find('textarea')
+ //      .val();
+
+ //    const bodyJSON = { title, content };
+ //    this.adapter.updateNote(note.id, bodyJSON)
+ //    .then(updatedNote => {
+ //      const note = Note.findById(updatedNote.id);
+ //      note.update(updatedNote);
+ //      this.addNotes();
+ //    });
+ //  }
+//Works for site #1, but not for the others. Figure out why, and fix
 function fetchNotes(siteId){
 	// console.log('fetchNotes')
 	console.log('fetchnotes')
@@ -102,6 +243,9 @@ function fetchNotes(siteId){
 	// document.querySelector("#sites").style.display = "none";  
 	// renderNoteForm(siteId)
 }
+
+//feature, edit the content in the form 
+//Feature: if the form already has some content, fetch that. 
 	// if (e.target.className == "see-sites-button") {
 	// 		let topicId = e.target.dataset.id
 	// 		console.log(topicId)
@@ -176,136 +320,3 @@ function fetchNotes(siteId){
 			// const seeSitesButton = document.getElementById("open-form")
 			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
-
-//this function grabs the values in the note -- ie, what the user wrote -- and passes it to postNote to be saved 
-function getNoteData(siteId) {
-	console.log("siteId: ",  siteId)
-	// e.preventDefault()
-	
-	const noteBodyInput = document.querySelector("#noteBody").value
-	// console.log("noteBody :", noteBodyInput)
-
-	document.addEventListener('click', (e) => {
-		if (e.target.className == "save-note") {
-			// console.log(e.target.dataset.id)
-			//found the exact id of that whole class that I want: 
-			let id = e.target.dataset.id
-			console.log("site-id: ", id)
-			postNote(e, noteBodyInput, id)	
-		}
-	})
-}
-
-
-//user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
-function postNote(e, body, site_id) {
-	e.preventDefault()
-	console.log('body, site_id: ', body, site_id)
-	let bodyData = {body, site_id}
-	fetch(notesEndPoint, {
-		method: "POST",
-		headers: {"Content-Type": "application/json"},
-		body: JSON.stringify(bodyData)
-	})
-	.then(response => response.json())
-	.then(note => {
-		
-		// console.log("note: ", note)
-		const noteData = note.data
-		let newNote = new Note(noteData, noteData.attributes)
-		console.log("newNote: ", newNote)
-		placeNote = document.getElementById("completed-text")
-		placeNote.innerHTML = newNote.body
-		// placeNote.setAttribute('data-id',newNote.id)
-		clear()
-	})
-	.catch(error => console.log(error))
-}
-//add it so that your new writing will appear next time fetch is called on. 
-
-		// give form an id and close it up. If id
-function clear() {
-		emptyNoteBody()
-		hideNoteForm()
-		addEditButton()	
-}
-
-function emptyNoteBody() {
-	document.querySelector("#noteBody").value = ""
-}
-
-function hideNoteForm() {
-	document.querySelector('form').style.display = "none";
-}
-
-function addEditButton() {
-	let editButton = document.createElement("button")
-	editButton.innerHTML = (`Coming Soon: Edit/Add More </button>`)	
-	// editButton.addAttribute -- data-id
-	let buttonSection = document.getElementById("buttons")
-	buttonSection.appendChild(editButton)
-}
-
-function hideExploreAndWriteButton() {
-	document.querySelector('.explore-and-write-button').style.display = "none";
-}
-
-
-function hideSiteList() {
-	document.querySelector('#sites').style.display = "none";
-}
-// function addShowSiteListButton() {
-// 	// return-to-sites"
-// 	const sites = document.querySelector("#sites")
-// 	sites.addEventListener('click', (e) => {
-// 		e.preventDefault()
-// 		sites.style.display = "block"
-	
-// 		document.querySelector('#topics').style.display = "none";
-// 	})
-// 	// console.log("Back to Sites --showSiteListButton")
-// 	// something.appendChild(showSiteListButton)
-// }
-
-function backToTopicsButton() {
-	console.log("back to topics")
-	document.querySelector('topics').style.display = "block";
-	//attach eventHandler to button 
-	//hid sites, show Topics 
-	// section id="notes" => style.display = "none"
-	document.querySelector("#sites").style.display = "none"; 
-	// Try display: unset or display: revert or display: normal or display: block 
-}
-
-
-function hideOtherSites() {
-	console.log("Coming Soon:hideOtherSites")
-	if (site.id !== this.id) {
-
-	}
-}
-
-function showallSites() {
-
-}
-//HANDLE FORM SUBMIT
- // handleFormSubmit(e) {
- //    e.preventDefault();
- //    const id = e.target.dataset.id;
- //    const note = Note.findById(id);
- //    const title = $(e.target)
- //      .find('input')
- //      .val();
- //    const content = $(e.target)
- //      .find('textarea')
- //      .val();
-
- //    const bodyJSON = { title, content };
- //    this.adapter.updateNote(note.id, bodyJSON)
- //    .then(updatedNote => {
- //      const note = Note.findById(updatedNote.id);
- //      note.update(updatedNote);
- //      this.addNotes();
- //    });
- //  }
-//Works for site #1, but not for the others. Figure out why, and fix
