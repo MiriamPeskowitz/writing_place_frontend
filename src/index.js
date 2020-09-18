@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-// DONE 1 -- fetches topic list  and puts onto DOM 
+// DONE 1 -- DOM loads and topic list is fetched and put on the DOM 
 function fetchTopics() {
 	// console.log("fetch Topics")
 	fetch(topicsEndPoint)
@@ -30,7 +30,7 @@ function fetchTopics() {
 }
 
 
-//2 DONE add button handler to get the id from e.target.dataset and call up the sites within a topic 
+//2 DONE A button handler is added to each topic, so that a user can click the button and see that topic's list of sites. EventListener is attached to the document/parent, uses e.target matching to catch the correct button click. 
 function seeSitesButtonHandler() {
 	console.log('writeButtonHandler')
 	document.addEventListener('click', (e) => {
@@ -42,8 +42,8 @@ function seeSitesButtonHandler() {
 	})
 }
 
-// 3 DONE fetch the list of 8 sites, through sites -- and change render site card to renderSiteList
-//passing topicId is how the code makes sure to get only the sites for the chosen topic, see first line in allSites.forEach 
+// 3 This function is called by SeeSitesButtonHandler. It fetches the list of sites, creates the object through sites.js. The topicId is passed in, and then a matcher is used to filter only sites that match that topic's id number
+
 function fetchSites(topicId) {
 	console.log('sites fetched')
 
@@ -74,38 +74,26 @@ function fetchSites(topicId) {
  	 }).catch(error => console.log(error))
 }
 
-
- 
-
-//4 User clicks Explore and Write button and a form renders to write a note 
-// 
+//4 User clicks Explore and Write button and a form renders so user can write a note. The event listener is attached to the document/parent, and the siteId is generated using e.target.dataset.id, and uses the static function Site.findById(id) to render the form.
 function handleExploreAndWriteButton(siteId) {
-	document.querySelector("#sites").addEventListener('click', (e) => {
-		console.log("EWButton clicked")
+	document.addEventListener('click', (e) => {
+		const siteId = parseInt(e.target.dataset.id)
+		console.log("site id: ", siteId)
 
-		const id = parseInt(e.target.dataset.id)
-		console.log("id: ", id)
-
-//open renderNoteForm in "writing-form"
-		const site = Site.findById(id)
+		const site = Site.findById(siteId)
 		console.log("site:", site)
+
+
+// Bug: attaches to the first one, problem with #writing-formDONE -- hide the list 
+//Bug: it's going through 10 times... deal with this later 
 		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
-		addShowSiteListButton()
+
 		hideExploreAndWriteButton()
-		// hide class="explore-and-write-button"
-		// hide everything that isn't this note
-		// add back-button 
+		hideSiteList()
+		//two other buttons are included in form render 			
 	})
 }
 
-
-//if note === note.id 
-	// console.log("this: ", this)
-	
-	// fetchNotes()
-	// siteNotes = findById(siteId)
-	// console.log("siteNotes: ", siteNotes )
-	
 
 function fetchNotes(siteId){
 	// console.log('fetchNotes')
@@ -262,22 +250,44 @@ function hideExploreAndWriteButton() {
 	document.querySelector('.explore-and-write-button').style.display = "none";
 }
 
-function addShowSiteListButton() {
-	let showSiteListButton = document.createElement('button')
-	showSiteListButton.innerHTML = "Back to Site List"
-	console.log("Back to Sites --showSiteListButton")
-	// something.appendChild(showSiteListButton)
+
+function hideSiteList() {
+	document.querySelector('#sites').style.display = "none";
 }
+// function addShowSiteListButton() {
+// 	// return-to-sites"
+// 	const sites = document.querySelector("#sites")
+// 	sites.addEventListener('click', (e) => {
+// 		e.preventDefault()
+// 		sites.style.display = "block"
+	
+// 		document.querySelector('#topics').style.display = "none";
+// 	})
+// 	// console.log("Back to Sites --showSiteListButton")
+// 	// something.appendChild(showSiteListButton)
+// }
 
 function backToTopicsButton() {
 	console.log("back to topics")
-	// document.querySelector('topics').style.display = "block";
+	document.querySelector('topics').style.display = "block";
 	//attach eventHandler to button 
 	//hid sites, show Topics 
 	// section id="notes" => style.display = "none"
-	//toggle this: document.querySelector("#topics").style.display = "none"; Try display: unset or display: revert or display: normal or display: block 
+	document.querySelector("#sites").style.display = "none"; 
+	// Try display: unset or display: revert or display: normal or display: block 
 }
 
+
+function hideOtherSites() {
+	console.log("Coming Soon:hideOtherSites")
+	if (site.id !== this.id) {
+
+	}
+}
+
+function showallSites() {
+
+}
 //HANDLE FORM SUBMIT
  // handleFormSubmit(e) {
  //    e.preventDefault();

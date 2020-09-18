@@ -28,7 +28,6 @@ class Site {
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
-				<div id="writing-form"></div>
 				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
@@ -37,6 +36,12 @@ class Site {
 	renderNoteForm() {
 		return  `
 			<div>
+				<div id="site-card">
+					<h3> ${this.name} </h3>
+					<img src=${this.image} width="100" height="100">
+					<p>${this.description}</p>
+					<br>
+				</div>
 				<form id="note-form" data-id=${this.id}>
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
