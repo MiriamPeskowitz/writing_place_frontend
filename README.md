@@ -5,6 +5,7 @@
 
 ### This MVP is a project for the Flatiron School's 4th project, JS frontend with Rails API. The API can be found at https://github.com/MiriamPeskowitz/writing_place_backend
 
+
 ### Future features: 
 
 
