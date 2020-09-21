@@ -51,7 +51,7 @@ class Site {
 						 <br>	
 
 						<button type="button" id="return-to-sites">Back to Site List</button>
-						<button type="button" id="return-to-topics">Coming Soon: Back to Topics</button>	
+						<button type="button" id="return-to-topics">Back to Topics</button>	
 					</div>
 				</form>
 			</div>	`
