@@ -5,8 +5,10 @@
 ### Writing Place uses a Rails API that can be found at https://github.com/MiriamPeskowitz/underground_backend
 
 ### Future features: 
+
 	1. Add your own topics and site lists
 	2. The ability to see all your writing for each topic together, so you can edit and stitch them together, and see something new grow. 
 	3. User signup/login
 
-### 
+
+
