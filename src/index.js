@@ -86,7 +86,7 @@ function handleExploreAndWriteButton(siteId) {
 		hideExploreAndWriteButton()
 		hideSiteList()
 		handleReturnToSitesButton()
-		//two other buttons are included in form render 			
+		handleReturnToTopicsButton()			
 	})
 }
 
@@ -117,16 +117,24 @@ function handleSaveNoteButton(siteId) {
 function handleReturnToSitesButton() {
 	document.getElementById('return-to-sites').addEventListener('click', () => {
 		
-			console.log('here at button')
-			showSites()
+			console.log('here at RTS button')
 			hideNoteForm()
+			showSites()
 		})
 			// let topicId = e.target.dataset.id
 			// console.log("topicId: ", topicId)
 			// fetchSites(topicId)
 }
 
-function handleReturnToTopicssButton() {
+function handleReturnToTopicsButton() {
+	document.getElementById('return-to-topics').addEventListener('click', () => {
+		
+			console.log('here at RTT button')
+			hideNoteForm()
+			hideSiteList()
+			showTopics()
+			
+		})
 
 }
 	// document.getElementById("return-to-sites").addEventListener('click', () => {
@@ -173,7 +181,7 @@ function emptyNoteBody() {
 }
 
 function hideNoteForm() {
-	document.querySelector('form').style.display = "none";
+	document.querySelector('#note-card').style.display = "none";
 }
 
 function addEditButton() {
