@@ -6,18 +6,8 @@ class Site {
 		this.image = data.attributes.image_url
 		this.description = data.attributes.description
 		this.topicId = parseInt(data.relationships.topic.data.id)
-		// this.noteBody = data.attributes.notes
-		// add these so that 
-		// add note.body = site
-		// //add this.noteId = site.
-		// constructor(note, noteAttributes) {
-		// this.id = parseInt(note.id)
-		// this.body = noteAttributes.body
-		// this.title = noteAttributes.title
-		// this.siteId = noteAttributes.site.id
-
-
-
+		this.notes = data.attributes.notes
+	
 
 		Site.all.push(this)
 	}
@@ -43,10 +33,10 @@ class Site {
 				<form id="note-form">
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
-		  	       <textarea  name="note" rows="20" cols="50" ></textarea>
+		  	       <textarea name="note" rows="20" cols="50" ></textarea>
 					<br>
 					<div id="buttons">
-						<button type='submit' class="save-note" data-id=${this.id} >Save Note</button>
+						<button type='submit' id="save-note" data-id=${this.id} >Save Note</button>
 						 <br>
 						 <br>	
 

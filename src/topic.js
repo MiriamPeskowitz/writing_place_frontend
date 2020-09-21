@@ -9,7 +9,8 @@ class Topic {
 		return `
 			<div data-id=${this.id}>
 			   <h3>${this.name}</h3>
-			   <button class="see-sites-button" data-id=${this.id}>See Sites</button>
+			   <button type="button" class="see-sites-button" data-id=${this.id}>See Sites</button>
+				<button type="button" id="show-writing-button">Coming Soon: Show My Writing</button>
 			</div>	`
 	}
 }

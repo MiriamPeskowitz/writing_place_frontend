@@ -1,3 +1,6 @@
+
+//think about how I would use this: as a way to show all notes? 
+//would have to parse through the notes. where would I do this? 
 class Note {
 	constructor(note, noteAttributes) {
 		this.id = parseInt(note.id)
