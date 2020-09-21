@@ -46,11 +46,12 @@ class Site {
 		  	       <textarea  name="note" rows="20" cols="50" ></textarea>
 					<br>
 					<div id="buttons">
-						<button class="save-note" data-id=${this.id} type='submit'>Save Note</button>
+						<button type='submit' class="save-note" data-id=${this.id} >Save Note</button>
 						 <br>
 						 <br>	
-						<button id="return-to-sites">Coming Soon: Back to Site List</button>
-						<button id="return-to-topics">Coming Soon: Back to Topics</button>	
+
+						<button type="button" id="return-to-sites">Back to Site List</button>
+						<button type="button" id="return-to-topics">Coming Soon: Back to Topics</button>	
 					</div>
 				</form>
 			</div>	`

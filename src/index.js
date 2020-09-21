@@ -85,28 +85,28 @@ function handleExploreAndWriteButton(siteId) {
 		console.log("note opened", siteId)
 		hideExploreAndWriteButton()
 		hideSiteList()
+		handleReturnToSitesButton()
 		//two other buttons are included in form render 			
 	})
 }
 
 //was getNoteData(siteId)
-//this is what I'm trying to figure out. 
+//START HERE: this is what I'm trying to figure out. 
 //5 this function gives functionality to the Save note button. It collects the value in the note's content, and adds an event listener and calls postNote. 
 function handleSaveNoteButton(siteId) {
 	// console.log("siteId: ",  siteId)
 
-
 	document.getElementsByClassName("save-note").addEventListener('submit', (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 		console.log("here")
-		if (e.target.className === "save-note") {
+		if (e.target &&e.target.className === "save-note") {
 			alert('yes')
 			// console.log(e.target.dataset.id)
 			//found the exact id of that whole class that I want: 
-			const id = e.target.dataset.id
+			const id = parseInt(e.target.dataset.id)
 			const noteBodyInput = document.querySelector("#noteBody").value
 			console.log("id: ", id)
-			console.log("noteBody :", noteBodyInput)
+			console.log("noteBody:", noteBodyInput)
 
 			alert('ready to post')
 			// postNote(noteBodyInput, id)	
@@ -114,6 +114,26 @@ function handleSaveNoteButton(siteId) {
 	})
 }
 
+function handleReturnToSitesButton() {
+	document.getElementById('return-to-sites').addEventListener('click', () => {
+		
+			console.log('here at button')
+			showSites()
+			hideNoteForm()
+		})
+			// let topicId = e.target.dataset.id
+			// console.log("topicId: ", topicId)
+			// fetchSites(topicId)
+}
+
+function handleReturnToTopicssButton() {
+
+}
+	// document.getElementById("return-to-sites").addEventListener('click', () => {
+	// 	console.log('here at button')
+	// 	showSites()
+	// 	hideNoteForm()
+	// })
 
 //user picks a site and starts to write a note. Need features: make sure the button has an event listener' maybe add back in fetchsites, or in sites.js 
 function postNote(body, site_id) {
@@ -172,44 +192,31 @@ function hideTopicList() {
 	document.querySelector("#topics").style.display = "none"; 
 }
 
+function showTopics() {
+	document.querySelector("#topics").style.display = "block";
+}
+
 function hideSiteList() {
 	document.querySelector('#sites').style.display = "none";
 }
-// function addShowSiteListButton() {
-// 	// return-to-sites"
-// 	const sites = document.querySelector("#sites")
-// 	sites.addEventListener('click', (e) => {
-// 		e.preventDefault()
-// 		sites.style.display = "block"
-	
-// 		document.querySelector('#topics').style.display = "none";
-// 	})
-// 	// console.log("Back to Sites --showSiteListButton")
-// 	// something.appendChild(showSiteListButton)
+
+function showSites() {
+	document.querySelector("#sites").style.display = "block";
+	// "return-to-sites"
+}
+
+
+
+// function backToTopicsButton() {
+// 	console.log("back to topics")
+// 	document.querySelector('#topics').style.display = "block";
+// 	//attach eventHandler to button 
+// 	//hid sites, show Topics 
+// 	// section id="notes" => style.display = "none"
+// 	document.querySelector("#sites").style.display = "none"; 
+// 	// Try display: unset or display: revert or display: normal or display: block 
 // }
 
-function backToTopicsButton() {
-	console.log("back to topics")
-	document.querySelector('#topics').style.display = "block";
-	//attach eventHandler to button 
-	//hid sites, show Topics 
-	// section id="notes" => style.display = "none"
-	document.querySelector("#sites").style.display = "none"; 
-	// Try display: unset or display: revert or display: normal or display: block 
-}
-
-
-function hideOtherSites() {
-	console.log("Coming Soon:hideOtherSites")
-	if (site.id !== this.id) {
-
-	}
-}
-
-function showallSites() {
-	document.querySelector('#sites').style.display = "block";
-
-}
 //HANDLE FORM SUBMIT
  // handleFormSubmit(e) {
  //    e.preventDefault();
@@ -305,13 +312,4 @@ function fetchNotes(siteId){
  
 
 	// console.log("siteId, topciId:" , id, topicId)	
-
-
-			// const seeSitesButton = document.getElementById("open-form")
-			// // let siteId = site.id
-			
-			// let topicId = newSite.topicId
-			// // console.log(siteId)
-			// const seeSitesButton = document.getElementById("open-form")
-			// seeSitesButton.addEventListener('click', (e) => handleExploreAndWriteButton(e,  topicId))
 
