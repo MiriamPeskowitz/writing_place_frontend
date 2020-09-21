@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
 	fetchTopics()
 	seeSitesButtonHandler()
+	showMyWritingButtonHandler()
 })
 
 
@@ -41,6 +42,17 @@ function seeSitesButtonHandler() {
 		}
 	})
 }
+
+//additional button handler, for the showMyWriting Feature-- shows all notes on a topic, so you can edit them. 
+function showMyWritingButtonHandler() {
+	console.log('showMyWritingButtonHandler')
+	document.addEventListener('click', (e) => {
+		if (e.target.id == "show-writing-button") {
+		alert("ShowMyWriting button clicked")
+		}
+	})
+}
+
 
 // 3 This function is called by SeeSitesButtonHandler. It fetches the list of sites, creates the object through sites.js. The topicId is passed in, and then a matcher is used to filter only sites that match that topic's id number
 
@@ -148,7 +160,8 @@ function postNote(body, site_id) {
 function clear() {
 		// emptyNoteBody()
 		// hideNoteForm()
-		showEditButton()	
+		showEditButton()
+		showMyWritingButton()	
 		// showSites()
 }
 
@@ -159,7 +172,6 @@ function emptyNoteBody() {
 function hideNoteForm() {
 	document.querySelector('#note-card').style.display = "none";
 }
-
 
 //bug: user clicks edit button and it remakes itself! 
 function showEditButton() {
@@ -192,8 +204,8 @@ function showSites() {
 }
 
 //TODO
-//1. //add field so that your new writing/note will appear next time fetch is called on. 
-
+//1. add field so that your new writing/note will appear next time fetch is called on. 
+//2. add section so you can see all your notes together, and edit them. 
 
  //  }
 //Works for site #1, but not for the others. Figure out why, and fix
