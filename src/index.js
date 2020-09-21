@@ -70,6 +70,8 @@ function fetchSites(topicId) {
 	 		let newSite = new Site(site)
 
  			document.querySelector('#sites').innerHTML += newSite.renderSiteList()
+ 			//bug to fix: on previously clicked on element in list, button is not visible. 
+ 			showExploreAndWriteButton()
 
  	//UI features:
  			hideTopicList()
@@ -98,7 +100,7 @@ function handleExploreAndWriteButton(siteId) {
 	//Bug: it's going through 10 times... deal with this later 
 		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
 		console.log("note opened", siteId)
-		hideExploreAndWriteButton()
+
 		hideSiteList()
 		handleReturnToSitesButton()
 		handleReturnToTopicsButton()
@@ -190,6 +192,10 @@ function hideExploreAndWriteButton() {
 	document.querySelector('.explore-and-write-button').style.display = "none";
 }
 
+function showExploreAndWriteButton() {
+	document.querySelector('.explore-and-write-button').style.display = "block";
+}
+
 function hideTopicList() {
 	document.querySelector("#topics").style.display = "none"; 
 }
@@ -209,17 +215,17 @@ function showSites() {
 
 //TODO
 //1. add field so that your new writing/note will appear next time fetch is called on. 
-//2. add section so you can see all your notes together, and edit them. 
+//2. add section so you can see all your notes together, and edit them. -- fetchNotes
 
  
 //Works for site #1, but not for the others. Figure out why, and fix
-function fetchNotes(siteId){
-	// console.log('fetchNotes')
-	console.log('fetchnotes')
-	document.querySelector('#writing-form').innerHTML = renderNoteForm(siteId)
-	// document.querySelector("#sites").style.display = "none";  
-	// renderNoteForm(siteId)
-}
+// function fetchNotes(siteId){
+// 	// console.log('fetchNotes')
+// 	console.log('fetchnotes')
+// 	document.querySelector('#writing-form').innerHTML = renderNoteForm(siteId)
+// 	// document.querySelector("#sites").style.display = "none";  
+// 	// renderNoteForm(siteId)
+// }
 
 // placeNote = document.getElementById("completed-text")
 // 		placeNote.innerHTML = newNote.body
