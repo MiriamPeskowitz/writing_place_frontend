@@ -23,6 +23,7 @@ class Site {
 			</div>`
 	}
 
+//Decided to renderNoteForm here, as part of site.js
 	renderNoteForm() {
 		return  `
 			<div id="note-card" data-id=${this.id}>
