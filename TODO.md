@@ -7,14 +7,16 @@ Monday: branch is mergeNotes
 
 
 Look at Deliverable list; still need: 
--- 3 ajax calls. at least 2 of the cruds.
+-- 3 ajax calls. at least 2 of the cruds.DONE
 	-- fetchTopics
 	--fetchSites
 	--saveNote
---check my lets and consts 
+--check my lets and consts DONE
 -- make a readme -- make the front end the main, link to backend in readme. Add some screenshots. Add stretch: write
 --blog post 
 --2-4 min video demo  
 https://learn.co/tracks/full-stack-web-development-v8/module-14-front-end-web-programming-in-javascript/section-13-project-mode/javascript-project-instructions#technical-and-complexity-requirements
 
 Blog: write about event bubbling and finding the parent. One of those things that's mysterious until you figure it out. 400 words, I can do this. 
+
+<h3>Stretch goal: When you're done, click a button to bring all your notes together into one. </h3> 
