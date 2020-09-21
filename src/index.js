@@ -175,7 +175,7 @@ function clear() {
 		// emptyNoteBody()
 		// hideNoteForm()
 		showEditButton()
-		showMyWritingButton()	
+		// showMyWritingButton() -- add back	
 		// showSites()
 }
 

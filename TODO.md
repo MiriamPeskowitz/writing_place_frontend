@@ -8,7 +8,7 @@ Monday: branch is mergeNotes
 
 Look at Deliverable list; still need: 
 -- 3 ajax calls. at least 2 of the cruds.DONE
-	-- fetchTopics
+	--fetchTopics
 	--fetchSites
 	--saveNote
 --check my lets and consts DONE
