@@ -17,4 +17,4 @@ class Topic {
 Topic.all = []
 
 // Feature Add: add image_url to Topics
-//Feature Add: CSS so the line up vertically 
+//Feature Add: CSS so they line up vertically 
