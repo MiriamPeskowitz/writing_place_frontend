@@ -159,10 +159,10 @@ function saveNote(body, site_id) {
 	.catch(error => console.log(error))
 }
 
-//bug: user clicks edit button and it remakes itself! 
+//bug: user clicks edit button and it remakes itself 
 function showEditButton() {
 	let editButton = document.createElement("button")
-	editButton.innerHTML = (`Coming Soon: Edit/Add More </button>`)	
+	editButton.innerHTML = ("Coming Soon: Edit/Add More")	
 	// editButton.addAttribute -- data-id
 	let buttonSection = document.getElementById("buttons")
 	buttonSection.appendChild(editButton)
@@ -173,14 +173,14 @@ function showEditButton() {
 // A series of UI buttons for showing and hiding sections
 function clear() {
 		// emptyNoteBody()
-		// hideNoteForm()
+		hideNoteForm()
 		showEditButton()
 		// showMyWritingButton() -- add back	
-		// showSites()
+		showSites()
 }
 
 function emptyNoteBody() {
-	document.querySelector("#noteBody").value = ""
+	document.querySelector("#noteBody").value
 }
 
 function hideNoteForm() {
