@@ -36,7 +36,7 @@ function seeSitesButtonHandler() {
 	document.addEventListener('click', (e) => {
 		if (e.target.className === "see-sites-button") {
 			let topicId = e.target.dataset.id
-			// console.log("topicId: ", topicId)
+			console.log("topicId: ", topicId)
 			fetchSites(topicId)
 		}
 	})

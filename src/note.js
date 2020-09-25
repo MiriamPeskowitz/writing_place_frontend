@@ -11,6 +11,11 @@ class Note {
 		Note.all.push(this)
 	}
 
+	renderAllNotes() {
+		//for each note, get this.body and send to theDOM 
+
+	}
+
 	static findById(id) {
 		return this.all.find(note => note.id === id)
 	}
