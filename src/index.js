@@ -49,7 +49,8 @@ function showMyWritingButtonHandler() {
 	document.addEventListener('click', (e) => {
 		if (e.target.id === "show-writing-button") {
 		alert("ShowMyWriting button clicked")
-	//feature: build this out
+	//feature: build this out: get the 
+
 		}
 	})
 }
@@ -160,13 +161,30 @@ function saveNote(body, site_id) {
 }
 
 //bug: user clicks edit button and it remakes itself! 
+//fix: check to see if it exists 
+//editButton.addClassname = "edit-button"
+//if (!hasClassEditButton)
+//var hasClassEditButton = element.classList.contains('edit-button');
+
 function showEditButton() {
+	if (!hasEditButton) {
 	let editButton = document.createElement("button")
-	editButton.innerHTML = (`Coming Soon: Edit/Add More </button>`)	
+	editButton.className = "edit-button"
+	editButton.innerHTML = ("Coming Soon: Edit/Write More")	
 	// editButton.addAttribute -- data-id
 	let buttonSection = document.getElementById("buttons")
 	buttonSection.appendChild(editButton)
+	}
 }
+
+
+//add handleEditButton() this function will check for hasEditButton() 
+//
+function hasEditButton() {
+	if ( element.classList.contains('edit-button') ) {
+	alert("has edit button already")
+}
+} 
 
 
 
