@@ -73,16 +73,15 @@ function fetchSites(topicId) {
  			//bug to fix: on previously clicked on element in list, button is not visible. 
  			showExploreAndWriteButton()
 
- 	//UI features:
+
  			hideTopicList()
- 	//add showSites() for loading after initial fetch. Can add: 
+ 		//add showSites() for loading after initial fetch. Can add: 
  		//if document.querySelector('#sites').style.display = "none";, then showSites()
  			showSites()
 	
 	//grab to send ids to the handleExploreAndWrite button 
 			const siteId = newSite.id
 			const topicId = newSite.topicId
-			// console.log("siteId", siteId)
 	//do I need this second one, if already have topicId on top? 
 			handleExploreAndWriteButton(siteId, topicId)
 			}
@@ -119,7 +118,6 @@ function handleReturnToSitesButton() {
 
 function handleReturnToTopicsButton() {
 	document.getElementById('return-to-topics').addEventListener('click', () => {
-			// console.log('here at RTT button')
 			hideNoteForm()
 			hideSiteList()
 			showTopics()			
@@ -132,8 +130,6 @@ function handleSaveNoteButton(siteId) {
 		e.preventDefault();
 		const id = siteId
 		const noteBodyInput = e.target.querySelector('textarea').value
-		console.log("id: ", id)
-		console.log("noteBody:", noteBodyInput)
 		saveNote(noteBodyInput, id)	
 	})
 }
@@ -148,27 +144,25 @@ function saveNote(body, site_id) {
 		body: JSON.stringify(bodyData)
 	})
 	.then(response => response.json())
-	.then(console.log('here'))
 	.then(note => {
 
 		console.log("update: ", note)
 		let noteData = note.data
 		console.log("noteData: ", noteData)
 		let newNote = new Note(noteData)
-		document.querySelector('#new-note').innerHTML += newNote.renderNote()
-		emptyNoteBody()
-
+		document.querySelector('#notes').innerHTML += newNote.renderNote()
+		reset()
 		})
 	.catch(error => console.log(error))
 }
 
 function reset() {
 		emptyNoteBody()
+		showSites()
 		hideNoteForm()
 		// showEditButton()
 		// showMyWritingButton() -- add back	
-		showSites()
-		console.log("got here")
+		
 }
 
 //bug: user clicks edit button and it remakes itself 
