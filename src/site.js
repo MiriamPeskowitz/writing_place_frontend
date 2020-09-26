@@ -12,27 +12,29 @@ class Site {
 		Site.all.push(this)
 	}
 
-	renderSiteList() {
-		const notes = this.notes.map(note => {
-			
-			return `<li> ${note.body} </li>`
 
+	renderSiteList() {
+		const notes = this.notes.map(note => {	
+			return `<li> ${note.body} </li>`
 		})
 		
 		const joinedNotes = notes.join()
-		console.log(joinedNotes)
+		// console.log(joinedNotes)
 
 		return  `
-		  	<div id="site-card">
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
+		  		<ul id="newest-note"></ul>
 				<ul id="notes">${joinedNotes} </ul>
+				<div id="new-note"></div>
 				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
 	}
+
+
 
 //Decided to renderNoteForm here, as part of site.js
 	renderNoteForm() {
@@ -42,11 +44,12 @@ class Site {
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
-
+				<ul id="newest-note"></ul>
 				<form id="note-form">
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
-		  	       <textarea name="note" rows="20" cols="50" ></textarea>
+		  	       <ul id="newest-note"></ul>
+		  	       <textarea id="note-body" rows="20" cols="50" ></textarea>
 					<br>
 					<div id="buttons">
 						<button type='submit' id="save-note" data-id=${this.id} >Save Note</button>

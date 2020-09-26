@@ -138,9 +138,9 @@ function handleSaveNoteButton(siteId) {
 	})
 }
 
-//7.Save note to db
+//7.Save note to db, and bring it back to the DOM 
 function saveNote(body, site_id) {	
-	console.log('here at PostNote: body, site_id: ', body, site_id)
+	console.log('here at saveNote: body, site_id: ', body, site_id)
 	const bodyData = {body, site_id}
 	fetch(notesEndPoint, {
 		method: "POST",
@@ -148,15 +148,27 @@ function saveNote(body, site_id) {
 		body: JSON.stringify(bodyData)
 	})
 	.then(response => response.json())
+	.then(console.log('here'))
 	.then(note => {
-		
-		const noteData = note.data
-		const newNote = new Note(noteData, noteData.attributes)
-		console.log("newNote: ", newNote)
-		
-		clear()
-	})
+
+		console.log("update: ", note)
+		let noteData = note.data
+		console.log("noteData: ", noteData)
+		let newNote = new Note(noteData)
+		document.querySelector('#new-note').innerHTML += newNote.renderNote()
+		emptyNoteBody()
+
+		})
 	.catch(error => console.log(error))
+}
+
+function reset() {
+		emptyNoteBody()
+		hideNoteForm()
+		// showEditButton()
+		// showMyWritingButton() -- add back	
+		showSites()
+		console.log("got here")
 }
 
 //bug: user clicks edit button and it remakes itself 
@@ -171,16 +183,11 @@ function showEditButton() {
 
 
 // A series of UI buttons for showing and hiding sections
-function clear() {
-		// emptyNoteBody()
-		hideNoteForm()
-		showEditButton()
-		// showMyWritingButton() -- add back	
-		showSites()
-}
 
+
+//FIgure this out 
 function emptyNoteBody() {
-	document.querySelector("#noteBody").value
+	document.querySelector("#note-body").value = ""
 }
 
 function hideNoteForm() {
