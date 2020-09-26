@@ -15,10 +15,10 @@ class Site {
 
 	renderSiteList() {
 		const notes = this.notes.map(note => {	
-			return `<li> ${note.body} </li>`
+			return `<li> ${note.body} <button>Edit</button></li>`
 		})
 		
-		const joinedNotes = notes.join()
+		const joinedNotes = notes.join('')
 		// console.log(joinedNotes)
 
 		return  `
@@ -26,9 +26,8 @@ class Site {
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
-		  		<ul id="newest-note"></ul>
+		  		
 				<ul id="notes">${joinedNotes} </ul>
-				<div id="new-note"></div>
 				<button class="explore-and-write-button" data-id=${this.id}>Explore and Write</button>
 				<p>**************</p>
 			</div>`
@@ -44,7 +43,7 @@ class Site {
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>
 				<br>
-				<ul id="newest-note"></ul>
+				<ul class="newest-note"></ul>
 				<form id="note-form">
 		  	       <label>Reflecting near ${this.name}</label>
 		  	       <br>
