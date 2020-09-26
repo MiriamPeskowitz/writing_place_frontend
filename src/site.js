@@ -15,13 +15,14 @@ class Site {
 
 	renderSiteList() {
 		const notes = this.notes.map(note => {	
-			return `<li> ${note.body} <button>Edit</button></li>`
+			return `<li> ${note.body} <button id="edit-button">Edit</button></li>`
 		})
 		
 		const joinedNotes = notes.join('')
 		// console.log(joinedNotes)
 
 		return  `
+			<div id="site-card" data-id=${this.id}
 				<h3> ${this.name} </h3>
 				<img src=${this.image} width="100" height="100">
 				<p>${this.description}</p>

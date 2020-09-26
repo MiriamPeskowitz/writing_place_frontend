@@ -12,7 +12,7 @@ class Note {
 	}
 
 	renderNote() {
-		return  `<li id="newest-note">${this.body} <button>Edit</button></li>`
+		return  `<li id="newest-note">${this.body} <button id="edit-button">Edit</button></li>`
 	}
 
 	renderAllNotes() {
