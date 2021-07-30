@@ -1,7 +1,7 @@
-const sitesEndPoint = "http://localhost:3000/api/v1/sites"
-const topicsEndPoint = "http://localhost:3000/api/v1/topics"
-const notesEndPoint = "http://localhost:3000/api/v1/notes"
-const endPoint = "http://localhost:3000/api/v1"
+const sitesEndPoint = `http://localhost:3000/api/v1/sites`
+const topicsEndPoint = `http://localhost:3000/api/v1/topics`
+const notesEndPoint = `http://localhost:3000/api/v1/notes`
+const endPoint = `http://localhost:3000/api/v1`
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('loaded')
@@ -94,10 +94,10 @@ function handleExploreAndWriteButton(siteId) {
 	document.getElementById("sites").addEventListener('click', (e) => {
 		const siteId = parseInt(e.target.dataset.id)
 		const site = Site.findById(siteId)
-	// console.log("site:", site)
+		console.log("site:", site)
 
 	//Bug: it's going through 10 times... deal with this later 
-		document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
+	 document.querySelector('#writing-form').innerHTML = site.renderNoteForm()
 		console.log("note opened", siteId)
 
 		hideSiteList()
